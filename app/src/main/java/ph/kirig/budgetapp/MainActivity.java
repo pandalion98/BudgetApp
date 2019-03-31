@@ -1,5 +1,6 @@
 package ph.kirig.budgetapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -9,11 +10,17 @@ import android.view.View;
 
 import com.google.android.material.navigation.NavigationView;
 
+import androidx.annotation.NonNull;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import ph.kirig.budgetapp.ui.home.HomeFragment;
+import ph.kirig.budgetapp.ui.txlist.TxListFragment;
 
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,14 +28,22 @@ import android.view.MenuItem;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private static final String FRAGMENT_HOME_TAG = "frag_home";
+    private static final String FRAGMENT_TXLIST_TAG = "frag_tx_list";
+
+    private FragmentManager fragmentManager;
+    private int fragmentDepth = 0; // 0 = Home Fragment
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        fragmentManager = getSupportFragmentManager();
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -37,21 +52,34 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        if (savedInstanceState == null) {
+            // Add the initial fragment
+            fragmentManager.beginTransaction()
+                    .add(R.id.container, HomeFragment.newInstance())
+                    .commit();
+        }
     }
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
+        } else if (fragmentDepth == 1) {
+            // Go back to home
+            fragmentDepth = 0;
+            //fragmentManager.popBackStack(FRAGMENT_HOME_TAG, 0); // 0 = Non-inclusive popping
+            fragmentManager.popBackStack();
         } else {
             super.onBackPressed();
         }
@@ -81,25 +109,44 @@ public class MainActivity extends AppCompatActivity
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        // Keep track of current stack depth
+        fragmentDepth = 1;
 
+        if (id == R.id.nav_tx_list) {
+            // Remove top fragment since we don't need it anymore (we're going home on back press)
+            fragmentManager.popBackStackImmediate();
+
+            // Create new fragment and transaction
+            // Replace whatever is in the fragment_container view with this fragment,
+            // and add the transaction to the back stack
+            fragmentManager.beginTransaction()
+                    .replace(R.id.container, new TxListFragment())
+                    .addToBackStack(null)
+                    .commit(); // Commit the transaction
+        } else if (id == R.id.nav_gallery) {
+            // Remove top fragment since we don't need it anymore (we're going home on back press)
+            fragmentManager.popBackStackImmediate();
+
+            // Create new fragment and transaction
+            // Replace whatever is in the fragment_container view with this fragment,
+            // and add the transaction to the back stack
+            fragmentManager.beginTransaction()
+                    .replace(R.id.container, new TxListFragment())
+                    .addToBackStack(FRAGMENT_TXLIST_TAG)
+                    .commit(); // Commit the transaction
         } else if (id == R.id.nav_slideshow) {
 
         } else if (id == R.id.nav_manage) {
 
         } else if (id == R.id.nav_share) {
-
         } else if (id == R.id.nav_send) {
-
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
