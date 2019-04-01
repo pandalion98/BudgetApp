@@ -1,17 +1,14 @@
-package ph.kirig.budgetapp.ui.home;
-
-import androidx.lifecycle.ViewModelProviders;
+package ph.kirig.budgetapp.home_ui.home;
 
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 import ph.kirig.budgetapp.R;
 
 public class HomeFragment extends Fragment {

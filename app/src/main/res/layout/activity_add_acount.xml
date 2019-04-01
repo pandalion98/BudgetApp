@@ -4,15 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".home_ui.transactionlist.TransactionListFragment">
+    tools:context=".AddAccountActivity">
 
     <TextView
+        android:id="@+id/label_acct_accountname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="I'm TxListFragment"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="8dp"
+        android:text="@string/label_acct_accountname"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        tools:layout_editor_absoluteY="80dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

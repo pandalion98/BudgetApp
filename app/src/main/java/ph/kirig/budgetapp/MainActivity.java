@@ -2,28 +2,23 @@ package ph.kirig.budgetapp;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
 
 import androidx.annotation.NonNull;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import ph.kirig.budgetapp.ui.home.HomeFragment;
-import ph.kirig.budgetapp.ui.txlist.TxListFragment;
-
-import android.view.Menu;
-import android.view.MenuItem;
+import ph.kirig.budgetapp.home_ui.home.HomeFragment;
+import ph.kirig.budgetapp.home_ui.transactionlist.TransactionListFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -124,7 +119,7 @@ public class MainActivity extends AppCompatActivity
             // Replace whatever is in the fragment_container view with this fragment,
             // and add the transaction to the back stack
             fragmentManager.beginTransaction()
-                    .replace(R.id.container, new TxListFragment())
+                    .replace(R.id.container, new TransactionListFragment())
                     .addToBackStack(null)
                     .commit(); // Commit the transaction
         } else if (id == R.id.nav_gallery) {
@@ -135,7 +130,7 @@ public class MainActivity extends AppCompatActivity
             // Replace whatever is in the fragment_container view with this fragment,
             // and add the transaction to the back stack
             fragmentManager.beginTransaction()
-                    .replace(R.id.container, new TxListFragment())
+                    .replace(R.id.container, new TransactionListFragment())
                     .addToBackStack(FRAGMENT_TXLIST_TAG)
                     .commit(); // Commit the transaction
         } else if (id == R.id.nav_slideshow) {
@@ -143,7 +138,9 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_manage) {
 
         } else if (id == R.id.nav_share) {
+
         } else if (id == R.id.nav_send) {
+            startActivity(new Intent(MainActivity.this, AddTransactionActivity.class));
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

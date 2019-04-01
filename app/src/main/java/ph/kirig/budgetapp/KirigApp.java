@@ -2,8 +2,6 @@ package ph.kirig.budgetapp;
 
 import android.app.Application;
 
-import ph.kirig.budgetapp.models.TransactionBox;
-
 
 /**
  * Created by Gene on 15/03/2019.
@@ -11,11 +9,11 @@ import ph.kirig.budgetapp.models.TransactionBox;
  * gene(at)kirig.ph
  */
 public class KirigApp extends Application {
-    public static final String TAG = "ObjectBoxExample";
+    public static final String TAG = "Kirig-BudgetApp";
 
     @Override
     public void onCreate() {
         super.onCreate();
-        TransactionBox.init(this);
+        ObjectBoxHelper.init(this);
     }
 }

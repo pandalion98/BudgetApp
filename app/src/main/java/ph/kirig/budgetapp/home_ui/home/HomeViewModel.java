@@ -1,4 +1,4 @@
-package ph.kirig.budgetapp.ui.home;
+package ph.kirig.budgetapp.home_ui.home;
 
 import androidx.lifecycle.ViewModel;
 

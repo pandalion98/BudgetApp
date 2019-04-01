@@ -1,25 +1,22 @@
-package ph.kirig.budgetapp.ui.txlist;
-
-import androidx.lifecycle.ViewModelProviders;
+package ph.kirig.budgetapp.home_ui.transactionlist;
 
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 import ph.kirig.budgetapp.R;
 
-public class TxListFragment extends Fragment {
+public class TransactionListFragment extends Fragment {
 
-    private TxListViewModel mViewModel;
+    private TransactionListViewModel mViewModel;
 
-    public static TxListFragment newInstance() {
-        return new TxListFragment();
+    public static TransactionListFragment newInstance() {
+        return new TransactionListFragment();
     }
 
     @Override
@@ -31,7 +28,7 @@ public class TxListFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(TxListViewModel.class);
+        mViewModel = ViewModelProviders.of(this).get(TransactionListViewModel.class);
         // TODO: Use the ViewModel
     }
 

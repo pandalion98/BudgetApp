@@ -4,29 +4,115 @@
   "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
   "entities": [
     {
-      "id": "2:2472031111559809404",
-      "lastPropertyId": "1:1039931185592353088",
-      "name": "TxRecord",
+      "id": "3:2486922129438348230",
+      "lastPropertyId": "7:2267191432423909807",
+      "name": "Account",
       "properties": [
         {
-          "id": "1:1039931185592353088",
-          "name": "txid"
+          "id": "1:1167514942996742476",
+          "name": "account_id"
+        },
+        {
+          "id": "2:5232686664955610512",
+          "name": "accountName"
+        },
+        {
+          "id": "3:1555697258884464250",
+          "name": "currency"
+        },
+        {
+          "id": "4:3626231842950789349",
+          "name": "accountMetadata"
+        },
+        {
+          "id": "7:2267191432423909807",
+          "name": "accountUUID"
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "4:1869117942368946620",
+      "lastPropertyId": "6:3556373179202447381",
+      "name": "Currency",
+      "properties": [
+        {
+          "id": "1:8987873945600446059",
+          "name": "currency_id"
+        },
+        {
+          "id": "2:8084084832972077596",
+          "name": "currencyUUID"
+        },
+        {
+          "id": "3:313032829812674218",
+          "name": "abbreviation"
+        },
+        {
+          "id": "4:5509223634320165813",
+          "name": "symbol"
+        },
+        {
+          "id": "5:639102809859300266",
+          "name": "precision"
+        },
+        {
+          "id": "6:3556373179202447381",
+          "name": "scale"
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "5:5588791649374538316",
+      "lastPropertyId": "5:1756441603423151192",
+      "name": "TransactionRecord",
+      "properties": [
+        {
+          "id": "1:6146763975481647368",
+          "name": "tx_id"
+        },
+        {
+          "id": "2:8024163549742331833",
+          "name": "txUUID"
+        },
+        {
+          "id": "3:4567010688945488630",
+          "name": "ownerAccount"
+        },
+        {
+          "id": "4:8143797969626440606",
+          "name": "txDescription"
+        },
+        {
+          "id": "5:1756441603423151192",
+          "name": "txAmount"
         }
       ],
       "relations": []
     }
   ],
-  "lastEntityId": "2:2472031111559809404",
+  "lastEntityId": "5:5588791649374538316",
   "lastIndexId": "0:0",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",
   "modelVersion": 4,
   "modelVersionParserMinimum": 4,
   "retiredEntityUids": [
-    8565338743467908198
+    8565338743467908198,
+    2472031111559809404
   ],
   "retiredIndexUids": [],
-  "retiredPropertyUids": [],
+  "retiredPropertyUids": [
+    1039931185592353088,
+    4716198445932262895,
+    2632800614376625509,
+    8358745815722505201,
+    220901475663996234,
+    1495159172683346441,
+    44898342980042741,
+    5393288436559368210
+  ],
   "retiredRelationUids": [],
   "version": 1
 }
