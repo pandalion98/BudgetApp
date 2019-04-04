@@ -14,9 +14,10 @@ import io.objectbox.annotation.Id;
 public class Currency {
     @Id
     public long id;
+
+    public String currencyName;
     public String currencyAbbrev;
     public String currencySymbol;
-    public int numericPrecision;
     public int numericScale;
     private String currencyUuid;
 

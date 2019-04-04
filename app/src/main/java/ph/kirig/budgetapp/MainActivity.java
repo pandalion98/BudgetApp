@@ -136,9 +136,9 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_slideshow) {
 
         } else if (id == R.id.nav_manage) {
-
+            startActivity(new Intent(MainActivity.this, AddCurrencyActivity.class));
         } else if (id == R.id.nav_share) {
-
+            startActivity(new Intent(MainActivity.this, AddAccountActivity.class));
         } else if (id == R.id.nav_send) {
             startActivity(new Intent(MainActivity.this, AddTransactionActivity.class));
         }

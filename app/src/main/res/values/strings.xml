@@ -23,4 +23,8 @@
     <string name="label_tx_amount">Amount:</string>
     <string name="hint_tx_note">Note</string>
     <string name="label_acct_accountname">Account Name:</string>
+    <string name="hint_currencyname">Currency Name (e.g. Japanese Yen)</string>
+    <string name="hint_currency_symbol">Currency Symbol (e.g. ₱)</string>
+    <string name="label_decimal_places">Decimal Places:</string>
+    <string name="hint_currency_abbrev">Currency Abbreviation (e.g. USD)</string>
 </resources>
