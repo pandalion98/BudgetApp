@@ -2,18 +2,13 @@ package ph.kirig.budgetapp.models;
 
 import java.util.UUID;
 
-import io.objectbox.annotation.Entity;
-import io.objectbox.annotation.Id;
-
 /**
  * Created by Gene on 01/04/2019.
  * Kirig Technologies
  * gene(at)kirig.ph
  */
-@Entity
+
 public class Currency {
-    @Id
-    public long id;
 
     public String currencyName;
     public String currencyAbbrev;

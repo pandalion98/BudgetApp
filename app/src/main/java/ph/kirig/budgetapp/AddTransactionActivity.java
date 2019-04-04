@@ -18,13 +18,11 @@ import java.util.List;
 import java.util.UUID;
 
 import androidx.appcompat.app.AppCompatActivity;
-import io.objectbox.Box;
 import ph.kirig.budgetapp.models.Account;
 import ph.kirig.budgetapp.models.TransactionRecord;
 
 public class AddTransactionActivity extends AppCompatActivity {
 
-    private Box<TransactionRecord> txBox;
     private EditText etAmount, etNote;
     private Spinner spinnerAccount;
     private Button btnCommitTx;
@@ -33,8 +31,6 @@ public class AddTransactionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_transaction);
-
-        txBox = ObjectBoxHelper.get().boxFor(TransactionRecord.class);
 
         etAmount = findViewById(R.id.edittext_tx_amt);
         etNote = findViewById(R.id.edittext_tx_note);
@@ -56,18 +52,14 @@ public class AddTransactionActivity extends AppCompatActivity {
         transactionRecord.setOwnerAccount(((Account) spinnerAccount.getSelectedItem()).getAccountUuid());
         transactionRecord.setTxAmount(new BigDecimal(etAmount.getText().toString()));
 
-        txBox.put(transactionRecord);
     }
 
     private class AccountAdapter extends BaseAdapter implements SpinnerAdapter {
         private Context ctx;
-        private Box<Account> acctBox; // Should be read-only in this context
         private List<Account> accountList;
 
         public AccountAdapter(Context context) {
             ctx = context;
-            acctBox = ObjectBoxHelper.get().boxFor(Account.class);
-            accountList = acctBox.getAll();
         }
 
         @Override
@@ -82,7 +74,7 @@ public class AddTransactionActivity extends AppCompatActivity {
 
         @Override
         public long getItemId(int position) {
-            return accountList.get(position).id;
+            return 0;
         }
 
         @Override
