@@ -22,7 +22,9 @@
             android:id="@+id/edittext_currency_symbol"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/hint_currency_symbol" />
+            android:hint="@string/hint_currency_symbol"
+            android:imeOptions="actionDone"
+            android:singleLine="true" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -40,8 +42,13 @@
             android:id="@+id/edittext_currency_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/hint_currencyname"
-            android:inputType="textPersonName" />
+            android:hint="@string/hint_currency_name"
+            android:imeOptions="actionNext"
+            android:inputType="textCapWords"
+            android:singleLine="true">
+
+            <requestFocus />
+        </com.google.android.material.textfield.TextInputEditText>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -60,7 +67,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/hint_currency_abbrev"
-            android:inputType="textCapWords" />
+            android:imeOptions="actionNext"
+            android:inputType="textNoSuggestions|textCapCharacters"
+            android:singleLine="true" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <SeekBar
@@ -71,7 +80,7 @@
         android:layout_marginTop="16dp"
         android:max="16"
         android:progress="2"
-        app:layout_constraintEnd_toStartOf="@+id/label_decimal_places2"
+        app:layout_constraintEnd_toStartOf="@+id/label_decimals_selected"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/label_decimal_places"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout5" />
@@ -88,15 +97,26 @@
         app:layout_constraintTop_toTopOf="@+id/seekbar_decimalplaces" />
 
     <TextView
-        android:id="@+id/label_decimal_places2"
+        android:id="@+id/label_decimals_selected"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:ems="2"
         android:gravity="center_horizontal"
-        android:text="00"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@+id/seekbar_decimalplaces"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/seekbar_decimalplaces" />
+
+    <Button
+        android:id="@+id/btn_commit_curr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/btn_commit_curr"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
