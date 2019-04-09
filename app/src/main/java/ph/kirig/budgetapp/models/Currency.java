@@ -10,17 +10,21 @@ import java.util.UUID;
 
 public class Currency {
 
-    public String currencyName;
-    public String currencyAbbrev;
-    public String currencySymbol;
-    public int numericScale;
-    private String currencyUuid;
+    public String full_name;
+    public String abbreviation;
+    public String symbol;
+    public int numeric_scale;
+    private String uuid;
 
     public Currency() {
-        currencyUuid = UUID.randomUUID().toString();
+        uuid = UUID.randomUUID().toString();
     }
 
-    public String getCurrencyUuid() {
-        return currencyUuid;
+    public Currency(String uuid) {
+        this.uuid = uuid;
+    }
+
+    public String getUuid() {
+        return uuid;
     }
 }

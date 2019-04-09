@@ -1,4 +1,4 @@
-package ph.kirig.budgetapp.database;
+package ph.kirig.budgetapp.persistence.local;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -11,33 +11,32 @@ import android.provider.BaseColumns;
  * Kirig Technologies
  * gene(at)kirig.ph
  */
-public class BudgetDb extends SQLiteOpenHelper {
+public class LocalSQLite extends SQLiteOpenHelper {
     // If you change the database schema, you must increment the database version.
     public static final int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "BudgetDB.db";
 
-    private static BudgetDb dbSingleton;
+    private static LocalSQLite dbHelperSingleton;
 
-    private BudgetDb(Context context) {
+    private LocalSQLite(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     // Singleton, so things flow smoothly instead of encountering db locks
-    public static BudgetDb getInstance(Context ctx) {
-        if (dbSingleton == null) {
-            dbSingleton = new BudgetDb(ctx);
+    public static synchronized LocalSQLite getInstance(Context ctx) {
+        if (dbHelperSingleton == null) {
+            dbHelperSingleton = new LocalSQLite(ctx.getApplicationContext()); // prevent Activity leaks
         }
 
-        return dbSingleton;
+        return dbHelperSingleton;
     }
-
 
     @Override
     public void onCreate(SQLiteDatabase db) {
         // Create account table
         String create_account_table =
                 "CREATE TABLE " + DbContract.TABLE_ACCT + " (" +
-                        DbContract.ACCT_COLUMN_UUID + " TEXT PRIMARY KEY," +
+                        DbContract.ACCT_COLUMN_UUID + " TEXT NOT NULL PRIMARY KEY UNIQUE," +
                         DbContract.ACCT_COLUMN_NAME + " TEXT," +
                         DbContract.ACCT_COLUMN_CURRENCY_UUID + " TEXT," +
                         DbContract.ACCT_COLUMN_ACCOUNT_METADATA + " TEXT)";
@@ -46,7 +45,7 @@ public class BudgetDb extends SQLiteOpenHelper {
         // Create currency table
         String create_currency_table =
                 "CREATE TABLE " + DbContract.TABLE_CURRENCY + " (" +
-                        DbContract.CURR_COLUMN_UUID + " TEXT PRIMARY KEY," +
+                        DbContract.CURR_COLUMN_UUID + " TEXT NOT NULL PRIMARY KEY UNIQUE," +
                         DbContract.CURR_COLUMN_NUMERIC_SCALE + " INTEGER," +
                         DbContract.CURR_COLUMN_NAME + " TEXT," +
                         DbContract.CURR_COLUMN_ABBREV + " TEXT," +
@@ -56,7 +55,7 @@ public class BudgetDb extends SQLiteOpenHelper {
         // Create record table
         String create_record_table =
                 "CREATE TABLE " + DbContract.TABLE_RECORDS + " (" +
-                        DbContract.REC_COLUMN_UUID + " TEXT PRIMARY KEY," +
+                        DbContract.REC_COLUMN_UUID + " TEXT NOT NULL PRIMARY KEY UNIQUE," +
                         DbContract.REC_COLUMN_AMOUNT_SIGNED + " INTEGER," +
                         DbContract.ACCT_COLUMN_CURRENCY_UUID + " TEXT," +
                         DbContract.ACCT_COLUMN_ACCOUNT_METADATA + " TEXT)";
@@ -81,11 +80,11 @@ public class BudgetDb extends SQLiteOpenHelper {
         static final String ACCT_COLUMN_ACCOUNT_METADATA = "account_metadata";
 
         static final String TABLE_CURRENCY = "tbl_currency";
-        static final String CURR_COLUMN_UUID = "currency_uuid";
+        static final String CURR_COLUMN_UUID = "uuid";
         static final String CURR_COLUMN_NUMERIC_SCALE = "numeric_scale";
-        static final String CURR_COLUMN_NAME = "currency_visible_name";
-        static final String CURR_COLUMN_ABBREV = "currency_abbrev";
-        static final String CURR_COLUMN_SYMBOL = "currency_symbol";
+        static final String CURR_COLUMN_NAME = "full_name";
+        static final String CURR_COLUMN_ABBREV = "abbreviation";
+        static final String CURR_COLUMN_SYMBOL = "symbol";
 
         static final String TABLE_RECORDS = "tbl_record";
         static final String REC_COLUMN_UUID = "record_uuid";

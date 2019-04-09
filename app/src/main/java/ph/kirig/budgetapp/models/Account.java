@@ -10,7 +10,6 @@ import java.util.UUID;
 
 
 public class Account {
-
     public String accountName;
     public String currencyUuid;
     public String accountMetadata;
