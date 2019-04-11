@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2019 Kirig Technologies. All rights reserved.
+  ~
+  ~ This document is considered proprietary and confidential. It may not be stored, reproduced,
+  ~ or transmitted by any means without express written permission from Kirig Technologies.
+  -->
+
+<androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/currency_list"
+    android:name="ph.kirig.budgetapp.CurrencyListFragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp"
+    app:layoutManager="LinearLayoutManager"
+    tools:context=".CurrencyListActivity"
+    tools:listitem="@layout/currency_list_content" />

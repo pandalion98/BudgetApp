@@ -1,3 +1,10 @@
+<!--
+  ~ Copyright (c) 2019 Kirig Technologies. All rights reserved.
+  ~
+  ~ This document is considered proprietary and confidential. It may not be stored, reproduced,
+  ~ or transmitted by any means without express written permission from Kirig Technologies.
+  -->
+
 <resources>
     <string name="app_name">BudgetApp</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -28,4 +35,9 @@
     <string name="hint_currency_symbol">Currency Symbol (e.g. ₱)</string>
     <string name="label_decimal_places">Decimal Places:</string>
     <string name="hint_currency_abbrev">Currency Abbreviation (e.g. USD)</string>
+    <string name="toast_curr_name_empty">Display name cannot be empty</string>
+    <string name="toast_curr_abbr_empty">Abbreviation cannot be empty</string>
+    <string name="toast_curr_symb_empty">Symbol cannot be empty</string>
+    <string name="title_currency_list">Currencies</string>
+    <string name="title_currency_detail">Currency Detail</string>
 </resources>

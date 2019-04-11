@@ -1,3 +1,10 @@
+<!--
+  ~ Copyright (c) 2019 Kirig Technologies. All rights reserved.
+  ~
+  ~ This document is considered proprietary and confidential. It may not be stored, reproduced,
+  ~ or transmitted by any means without express written permission from Kirig Technologies.
+  -->
+
 <resources>
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
@@ -6,4 +13,7 @@
     <dimen name="nav_header_height">176dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="appbar_padding_top">8dp</dimen>
+    <dimen name="app_bar_height">200dp</dimen>
+    <dimen name="item_width">200dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
 </resources>

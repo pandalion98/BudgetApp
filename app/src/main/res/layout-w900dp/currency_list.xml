@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2019 Kirig Technologies. All rights reserved.
+  ~
+  ~ This document is considered proprietary and confidential. It may not be stored, reproduced,
+  ~ or transmitted by any means without express written permission from Kirig Technologies.
+  -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp"
+    android:baselineAligned="false"
+    android:divider="?android:attr/dividerHorizontal"
+    android:orientation="horizontal"
+    android:showDividers="middle"
+    tools:context=".CurrencyListActivity">
+
+    <!--
+    This layout is a two-pane layout for the Currencies
+    master/detail flow.
+    
+    -->
+
+    <androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/currency_list"
+        android:name="ph.kirig.budgetapp.CurrencyListFragment"
+        android:layout_width="@dimen/item_width"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        app:layoutManager="LinearLayoutManager"
+        tools:context="ph.kirig.budgetapp.CurrencyListActivity"
+        tools:listitem="@layout/currency_list_content" />
+
+    <FrameLayout
+        android:id="@+id/currency_detail_container"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="3" />
+
+</LinearLayout>

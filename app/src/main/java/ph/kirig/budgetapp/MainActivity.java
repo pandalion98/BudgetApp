@@ -1,3 +1,10 @@
+/*
+ * Copyright (c) 2019 Kirig Technologies. All rights reserved.
+ *
+ * This document is considered proprietary and confidential. It may not be stored, reproduced,
+ * or transmitted by any means without express written permission from Kirig Technologies.
+ */
+
 package ph.kirig.budgetapp;
 
 import android.content.Intent;
@@ -134,7 +141,7 @@ public class MainActivity extends AppCompatActivity
                     .addToBackStack(FRAGMENT_TXLIST_TAG)
                     .commit(); // Commit the transaction
         } else if (id == R.id.nav_slideshow) {
-
+            startActivity(new Intent(MainActivity.this, CurrencyListActivity.class));
         } else if (id == R.id.nav_manage) {
             startActivity(new Intent(MainActivity.this, AddCurrencyActivity.class));
         } else if (id == R.id.nav_share) {
