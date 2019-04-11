@@ -6,5 +6,5 @@ package ph.kirig.budgetapp.persistence;
  * gene(at)kirig.ph
  */
 public interface Query {
-    public String toSql();
+    String generate();
 }

@@ -75,7 +75,7 @@ public class CurrencyLocalRepository implements Repository<Currency> {
 
     @Override
     public List<Currency> query(Query q) {
-        Cursor cur = db.rawQuery(q.toSql(), null);
+        Cursor cur = db.rawQuery(q.generate(), null);
         cur.moveToFirst();
 
         ArrayList<Currency> buffer = new ArrayList<>();
