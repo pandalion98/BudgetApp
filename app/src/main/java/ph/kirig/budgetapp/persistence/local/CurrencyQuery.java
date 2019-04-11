@@ -25,7 +25,7 @@ import static ph.kirig.budgetapp.persistence.local.LocalSQLite.DbContract.TABLE_
 
 public class CurrencyQuery implements Query {
     private boolean fullStringSearch;
-    private String uuid, name, abbrev, symbol, queryString;
+    private String uuid, name, abbrev, symbol;
 
     public CurrencyQuery() {
         this.fullStringSearch = false;
@@ -52,11 +52,6 @@ public class CurrencyQuery implements Query {
 
     public CurrencyQuery addSymbol(String symbol) {
         this.symbol = symbol;
-        return this;
-    }
-
-    public CurrencyQuery addQueryString(String queryString) {
-        this.queryString = queryString;
         return this;
     }
 
