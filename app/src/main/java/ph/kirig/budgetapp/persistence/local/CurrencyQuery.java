@@ -24,16 +24,11 @@ import static ph.kirig.budgetapp.persistence.local.LocalSQLite.DbContract.TABLE_
 
 
 public class CurrencyQuery implements Query {
-    private boolean fullStringSearch;
     private String uuid, name, abbrev, symbol;
 
     public CurrencyQuery() {
-        this.fullStringSearch = false;
     }
 
-    public CurrencyQuery(boolean fullStringSearch) {
-        this.fullStringSearch = fullStringSearch;
-    }
 
     public CurrencyQuery addUuid(String uuid) {
         this.uuid = uuid;
@@ -101,7 +96,7 @@ public class CurrencyQuery implements Query {
             query += CURR_COLUMN_SYMBOL + " LIKE " + "\'" + symbol + "%\'";
         }
 
-        return query;
+        return query.trim();
     }
 }
 

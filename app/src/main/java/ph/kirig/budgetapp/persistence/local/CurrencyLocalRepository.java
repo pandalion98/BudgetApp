@@ -76,11 +76,10 @@ public class CurrencyLocalRepository implements Repository<Currency> {
     @Override
     public List<Currency> query(Query q) {
         Cursor cur = db.rawQuery(q.generate(), null);
-        cur.moveToFirst();
 
         ArrayList<Currency> buffer = new ArrayList<>();
 
-        while (!cur.isAfterLast()) {
+        while (cur.moveToNext()) {
             Currency e = new Currency(cur.getString(cur.getColumnIndex(CURR_COLUMN_UUID)));
             e.full_name = cur.getString(cur.getColumnIndex(CURR_COLUMN_NAME));
             e.abbreviation = cur.getString(cur.getColumnIndex(CURR_COLUMN_ABBREV));
