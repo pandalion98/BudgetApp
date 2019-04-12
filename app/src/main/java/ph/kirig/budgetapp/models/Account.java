@@ -26,6 +26,10 @@ public class Account {
         accountUuid = UUID.randomUUID().toString();
     }
 
+    public Account(String uuid) {
+        accountUuid = uuid;
+    }
+
     public String getUuid() {
         return accountUuid;
     }
