@@ -78,14 +78,17 @@ public class AddCurrencyActivity extends AppCompatActivity {
     private void createCurrency(String currFullName, String abbrv, String symb, int scale) {
         if (currFullName.trim().isEmpty()) {
             toasty(getString(R.string.toast_curr_name_empty));
+            return;
         }
 
         if (abbrv.trim().isEmpty()) {
             toasty(getString(R.string.toast_curr_abbr_empty));
+            return;
         }
 
         if (symb.trim().isEmpty()) {
             toasty(getString(R.string.toast_curr_symb_empty));
+            return;
         }
 
         Currency c = new Currency();
