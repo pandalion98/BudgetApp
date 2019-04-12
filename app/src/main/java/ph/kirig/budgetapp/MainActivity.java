@@ -24,6 +24,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
+import ph.kirig.budgetapp.currency_ui.AddCurrencyActivity;
+import ph.kirig.budgetapp.currency_ui.CurrencyListActivity;
 import ph.kirig.budgetapp.home_ui.home.HomeFragment;
 import ph.kirig.budgetapp.home_ui.transactionlist.TransactionListFragment;
 
@@ -140,13 +142,13 @@ public class MainActivity extends AppCompatActivity
                     .replace(R.id.container, new TransactionListFragment())
                     .addToBackStack(FRAGMENT_TXLIST_TAG)
                     .commit(); // Commit the transaction
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_list_currencies) {
             startActivity(new Intent(MainActivity.this, CurrencyListActivity.class));
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_add_currency) {
             startActivity(new Intent(MainActivity.this, AddCurrencyActivity.class));
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.nav_add_account) {
             startActivity(new Intent(MainActivity.this, AddAccountActivity.class));
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_add_tx) {
             startActivity(new Intent(MainActivity.this, AddTransactionActivity.class));
         }
 

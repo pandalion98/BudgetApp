@@ -22,19 +22,19 @@
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
         <activity
-            android:name=".CurrencyListActivity"
+            android:name=".currency_ui.CurrencyListActivity"
             android:label="@string/title_currency_list"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
-            android:name=".CurrencyDetailActivity"
+            android:name=".currency_ui.CurrencyDetailActivity"
             android:label="@string/title_currency_detail"
-            android:parentActivityName=".CurrencyListActivity"
+            android:parentActivityName=".currency_ui.CurrencyListActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="ph.kirig.budgetapp.CurrencyListActivity" />
+                android:value="ph.kirig.budgetapp.currency_ui.CurrencyListActivity" />
         </activity>
-        <activity android:name=".AddCurrencyActivity" />
+        <activity android:name=".currency_ui.AddCurrencyActivity" />
         <activity android:name=".AddAccountActivity" />
         <activity android:name=".AddTransactionActivity" />
         <activity

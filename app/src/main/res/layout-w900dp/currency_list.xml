@@ -16,7 +16,7 @@
     android:divider="?android:attr/dividerHorizontal"
     android:orientation="horizontal"
     android:showDividers="middle"
-    tools:context=".CurrencyListActivity">
+    tools:context=".currency_ui.CurrencyListActivity">
 
     <!--
     This layout is a two-pane layout for the Currencies
@@ -33,7 +33,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         app:layoutManager="LinearLayoutManager"
-        tools:context="ph.kirig.budgetapp.CurrencyListActivity"
+        tools:context="ph.kirig.budgetapp.currency_ui.CurrencyListActivity"
         tools:listitem="@layout/currency_list_content" />
 
     <FrameLayout

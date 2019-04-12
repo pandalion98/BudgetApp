@@ -5,7 +5,7 @@
  * or transmitted by any means without express written permission from Kirig Technologies.
  */
 
-package ph.kirig.budgetapp;
+package ph.kirig.budgetapp.currency_ui;
 
 import android.content.Context;
 import android.content.Intent;
@@ -24,6 +24,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.RecyclerView;
+import ph.kirig.budgetapp.R;
 import ph.kirig.budgetapp.models.Currency;
 import ph.kirig.budgetapp.persistence.local.CurrencyLocalRepository;
 import ph.kirig.budgetapp.persistence.local.CurrencyQuery;

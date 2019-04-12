@@ -5,7 +5,7 @@
  * or transmitted by any means without express written permission from Kirig Technologies.
  */
 
-package ph.kirig.budgetapp;
+package ph.kirig.budgetapp.currency_ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,6 +18,7 @@ import com.google.android.material.snackbar.Snackbar;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import ph.kirig.budgetapp.R;
 
 /**
  * An activity representing a single Currency detail screen. This
