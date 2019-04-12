@@ -26,7 +26,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.RecyclerView;
 import ph.kirig.budgetapp.R;
 import ph.kirig.budgetapp.models.Currency;
-import ph.kirig.budgetapp.persistence.local.CurrencyLocalRepository;
+import ph.kirig.budgetapp.persistence.local.CurrencyLocalRepo;
 import ph.kirig.budgetapp.persistence.local.CurrencyQuery;
 
 /**
@@ -71,8 +71,8 @@ public class CurrencyListActivity extends AppCompatActivity {
             mTwoPane = true;
         }
 
-        CurrencyLocalRepository localRepository
-                = new CurrencyLocalRepository(CurrencyListActivity.this);
+        CurrencyLocalRepo localRepository
+                = new CurrencyLocalRepo(CurrencyListActivity.this);
 
         List<Currency> currencyList = localRepository.query(new CurrencyQuery());
 

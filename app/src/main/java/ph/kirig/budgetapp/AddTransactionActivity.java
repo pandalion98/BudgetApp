@@ -27,7 +27,7 @@ import java.util.UUID;
 import androidx.appcompat.app.AppCompatActivity;
 import ph.kirig.budgetapp.models.Account;
 import ph.kirig.budgetapp.models.TransactionRecord;
-import ph.kirig.budgetapp.persistence.local.AccountLocalRepository;
+import ph.kirig.budgetapp.persistence.local.AccountLocalRepo;
 import ph.kirig.budgetapp.persistence.local.AccountQuery;
 
 public class AddTransactionActivity extends AppCompatActivity {
@@ -53,7 +53,7 @@ public class AddTransactionActivity extends AppCompatActivity {
             }
         });
 
-        AccountLocalRepository aclr = new AccountLocalRepository(AddTransactionActivity.this);
+        AccountLocalRepo aclr = new AccountLocalRepo(AddTransactionActivity.this);
         final List<Account> accounts = aclr.query(new AccountQuery());
 
         AccountAdapter accountAdapter =

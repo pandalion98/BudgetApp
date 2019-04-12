@@ -21,7 +21,7 @@ import java.util.List;
 import androidx.fragment.app.Fragment;
 import ph.kirig.budgetapp.R;
 import ph.kirig.budgetapp.models.Currency;
-import ph.kirig.budgetapp.persistence.local.CurrencyLocalRepository;
+import ph.kirig.budgetapp.persistence.local.CurrencyLocalRepo;
 import ph.kirig.budgetapp.persistence.local.CurrencyQuery;
 
 /**
@@ -58,8 +58,8 @@ public class CurrencyDetailFragment extends Fragment {
             // arguments. In a real-world scenario, use a Loader
             // to load content from a content provider.
 
-            CurrencyLocalRepository localRepository
-                    = new CurrencyLocalRepository(getActivity());
+            CurrencyLocalRepo localRepository
+                    = new CurrencyLocalRepo(getActivity());
 
             List<Currency> currencyList
                     = localRepository.query(

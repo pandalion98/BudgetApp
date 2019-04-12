@@ -26,8 +26,8 @@ import java.util.List;
 import androidx.appcompat.app.AppCompatActivity;
 import ph.kirig.budgetapp.models.Account;
 import ph.kirig.budgetapp.models.Currency;
-import ph.kirig.budgetapp.persistence.local.AccountLocalRepository;
-import ph.kirig.budgetapp.persistence.local.CurrencyLocalRepository;
+import ph.kirig.budgetapp.persistence.local.AccountLocalRepo;
+import ph.kirig.budgetapp.persistence.local.CurrencyLocalRepo;
 import ph.kirig.budgetapp.persistence.local.CurrencyQuery;
 
 public class AddAccountActivity extends AppCompatActivity {
@@ -45,7 +45,7 @@ public class AddAccountActivity extends AppCompatActivity {
         spinnerCurrency = findViewById(R.id.spinner_account_select);
         btnCommitAcct = findViewById(R.id.btn_commit_acct);
 
-        CurrencyLocalRepository cclr = new CurrencyLocalRepository(AddAccountActivity.this);
+        CurrencyLocalRepo cclr = new CurrencyLocalRepo(AddAccountActivity.this);
         final List<Currency> currencies = cclr.query(new CurrencyQuery());
 
         CurrencyAdapter currencyAdapter =
@@ -78,7 +78,7 @@ public class AddAccountActivity extends AppCompatActivity {
         account.accountName = accountName;
         account.currencyUuid = currency.getUuid();
 
-        AccountLocalRepository aclr = new AccountLocalRepository(AddAccountActivity.this);
+        AccountLocalRepo aclr = new AccountLocalRepo(AddAccountActivity.this);
         aclr.add(account);
     }
 

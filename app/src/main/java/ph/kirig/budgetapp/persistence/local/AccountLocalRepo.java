@@ -31,10 +31,10 @@ import static ph.kirig.budgetapp.persistence.local.LocalSQLite.DbContract.TABLE_
  * Kirig Technologies
  * gene(at)kirig.ph
  */
-public class AccountLocalRepository implements Repository<Account> {
+public class AccountLocalRepo implements Repository<Account> {
     private SQLiteDatabase db;
 
-    public AccountLocalRepository(Context ctx) {
+    public AccountLocalRepo(Context ctx) {
         db = LocalSQLite.getInstance(ctx.getApplicationContext()).getWritableDatabase();
     }
 

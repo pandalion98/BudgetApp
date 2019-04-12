@@ -31,10 +31,10 @@ import static ph.kirig.budgetapp.persistence.local.LocalSQLite.DbContract.TABLE_
  * Kirig Technologies
  * gene(at)kirig.ph
  */
-public class CurrencyLocalRepository implements Repository<Currency> {
+public class CurrencyLocalRepo implements Repository<Currency> {
     private SQLiteDatabase db;
 
-    public CurrencyLocalRepository(Context ctx) {
+    public CurrencyLocalRepo(Context ctx) {
         db = LocalSQLite.getInstance(ctx.getApplicationContext()).getWritableDatabase();
     }
 
