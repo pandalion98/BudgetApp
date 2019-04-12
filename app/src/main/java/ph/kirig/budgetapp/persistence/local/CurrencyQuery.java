@@ -52,49 +52,6 @@ public class CurrencyQuery implements SqlQuery {
         return this;
     }
 
-//    @Override
-//    public String generateFull() {
-//        String query = "SELECT * FROM " + TABLE_CURRENCY + " ";
-//
-//        boolean appendedWhere = false;
-//
-//        if (uuid != null) {
-//            query += "WHERE ";
-//            appendedWhere = true;
-//            query += CURR_COLUMN_UUID + " = " + "\'" + uuid + "\'";
-//        }
-//
-//        if (name != null) {
-//            query += appendedWhere ? "OR " : "WHERE ";
-//            if (!appendedWhere) {
-//                appendedWhere = true;
-//            }
-//
-//            query += CURR_COLUMN_NAME + " LIKE " + "\'" + name + "%\'";
-//        }
-//
-//        if (abbrev != null) {
-//            query += appendedWhere ? "OR " : "WHERE ";
-//            if (!appendedWhere) {
-//                appendedWhere = true;
-//            }
-//
-//            query += CURR_COLUMN_ABBREV + " LIKE " + "\'" + abbrev + "%\'";
-//        }
-//
-//        if (symbol != null) {
-//            query += appendedWhere ? "OR " : "WHERE ";
-////            if (!appendedWhere) {
-////                // TODO: Uncomment and follow pattern if more of these clauses exist
-////                appendedWhere = true;
-////            }
-//
-//            query += CURR_COLUMN_SYMBOL + " LIKE " + "\'" + symbol + "%\'";
-//        }
-//
-//        return query.trim();
-//    }
-
     @Override
     public String generateSqlPreparedStatement() {
         String query = "SELECT * FROM " + TABLE_CURRENCY + " ";

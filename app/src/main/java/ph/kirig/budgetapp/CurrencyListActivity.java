@@ -92,6 +92,15 @@ public class CurrencyListActivity extends AppCompatActivity {
         private final CurrencyListActivity mParentActivity;
         private final List<Currency> mValues;
         private final boolean mTwoPane;
+
+        SimpleItemRecyclerViewAdapter(CurrencyListActivity parent,
+                                      List<Currency> items,
+                                      boolean twoPane) {
+            mValues = items;
+            mParentActivity = parent;
+            mTwoPane = twoPane;
+        }
+
         private final View.OnClickListener mOnClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -114,14 +123,6 @@ public class CurrencyListActivity extends AppCompatActivity {
             }
         };
 
-        SimpleItemRecyclerViewAdapter(CurrencyListActivity parent,
-                                      List<Currency> items,
-                                      boolean twoPane) {
-            mValues = items;
-            mParentActivity = parent;
-            mTwoPane = twoPane;
-        }
-
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext())
@@ -131,8 +132,8 @@ public class CurrencyListActivity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(final ViewHolder holder, int position) {
-            holder.mIdView.setText(mValues.get(position).getUuid());
-            holder.mContentView.setText(mValues.get(position).full_name);
+            holder.mIdView.setText(mValues.get(position).abbreviation);
+            holder.mContentView.setText(mValues.get(position).getUuid());
 
             holder.itemView.setTag(mValues.get(position));
             holder.itemView.setOnClickListener(mOnClickListener);

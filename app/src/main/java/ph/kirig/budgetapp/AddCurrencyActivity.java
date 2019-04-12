@@ -88,9 +88,9 @@ public class AddCurrencyActivity extends AppCompatActivity {
         }
 
         Currency c = new Currency();
-        c.full_name = currFullName;
-        c.abbreviation = abbrv;
-        c.symbol = symb;
+        c.full_name = currFullName.trim();
+        c.abbreviation = abbrv.trim();
+        c.symbol = symb.trim();
         c.numeric_scale = scale;
 
         repository.add(c);
