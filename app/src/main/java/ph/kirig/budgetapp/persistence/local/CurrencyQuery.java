@@ -9,7 +9,7 @@ package ph.kirig.budgetapp.persistence.local;
 
 import java.util.ArrayList;
 
-import ph.kirig.budgetapp.persistence.SqlQuery;
+import ph.kirig.budgetapp.persistence.SqlPreparedQuery;
 
 import static ph.kirig.budgetapp.persistence.local.LocalSQLite.DbContract.CURR_COLUMN_ABBREV;
 import static ph.kirig.budgetapp.persistence.local.LocalSQLite.DbContract.CURR_COLUMN_NAME;
@@ -25,7 +25,7 @@ import static ph.kirig.budgetapp.persistence.local.LocalSQLite.DbContract.TABLE_
  */
 
 
-public class CurrencyQuery implements SqlQuery {
+public class CurrencyQuery implements SqlPreparedQuery {
     private String uuid, name, abbrev, symbol;
 
     public CurrencyQuery() {

@@ -12,7 +12,7 @@ package ph.kirig.budgetapp.persistence;
  * Kirig Technologies
  * gene(at)kirig.ph
  */
-public interface SqlQuery {
+public interface SqlPreparedQuery {
 //    /**
 //     * Generate the full SQL query, with arguments and all.
 //     *

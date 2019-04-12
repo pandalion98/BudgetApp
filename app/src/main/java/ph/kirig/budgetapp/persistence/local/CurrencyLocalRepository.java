@@ -17,7 +17,7 @@ import java.util.List;
 
 import ph.kirig.budgetapp.models.Currency;
 import ph.kirig.budgetapp.persistence.Repository;
-import ph.kirig.budgetapp.persistence.SqlQuery;
+import ph.kirig.budgetapp.persistence.SqlPreparedQuery;
 
 import static ph.kirig.budgetapp.persistence.local.LocalSQLite.DbContract.CURR_COLUMN_ABBREV;
 import static ph.kirig.budgetapp.persistence.local.LocalSQLite.DbContract.CURR_COLUMN_NAME;
@@ -50,19 +50,6 @@ public class CurrencyLocalRepository implements Repository<Currency> {
     }
 
     @Override
-    public void add(Iterable<Currency> items) {
-        for (Currency item : items) {
-            ContentValues insertValues = new ContentValues();
-            insertValues.put(CURR_COLUMN_UUID, item.getUuid());
-            insertValues.put(CURR_COLUMN_NUMERIC_SCALE, item.numeric_scale);
-            insertValues.put(CURR_COLUMN_NAME, item.full_name);
-            insertValues.put(CURR_COLUMN_ABBREV, item.abbreviation);
-            insertValues.put(CURR_COLUMN_SYMBOL, item.symbol);
-            db.insert(TABLE_CURRENCY, null, insertValues);
-        }
-    }
-
-    @Override
     public void update(Currency item) {
         ContentValues values = new ContentValues();
         values.put(CURR_COLUMN_NUMERIC_SCALE, item.numeric_scale);
@@ -81,7 +68,7 @@ public class CurrencyLocalRepository implements Repository<Currency> {
     }
 
     @Override
-    public List<Currency> query(SqlQuery q) {
+    public List<Currency> query(SqlPreparedQuery q) {
         Cursor cur = db.rawQuery(q.generateSqlPreparedStatement(), q.generateSelectionArgs());
 
         ArrayList<Currency> buffer = new ArrayList<>();
