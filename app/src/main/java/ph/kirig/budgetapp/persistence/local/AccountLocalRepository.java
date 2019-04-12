@@ -9,8 +9,10 @@ package ph.kirig.budgetapp.persistence.local;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import ph.kirig.budgetapp.models.Account;
@@ -66,6 +68,20 @@ public class AccountLocalRepository implements Repository<Account> {
 
     @Override
     public List<Account> query(SqlPreparedQuery q) {
-        return null;
+        Cursor cur = db.rawQuery(q.generateSqlPreparedStatement(), q.generateSelectionArgs());
+
+        ArrayList<Account> buffer = new ArrayList<>();
+
+        while (cur.moveToNext()) {
+            Account e = new Account(cur.getString(cur.getColumnIndex(ACCT_COLUMN_UUID)));
+            e.accountName = cur.getString(cur.getColumnIndex(ACCT_COLUMN_NAME));
+            e.currencyUuid = cur.getString(cur.getColumnIndex(ACCT_COLUMN_CURRENCY_UUID));
+            e.accountMetadata = cur.getString(cur.getColumnIndex(ACCT_COLUMN_ACCOUNT_METADATA));
+
+            buffer.add(e);
+        }
+
+        cur.close();
+        return buffer;
     }
 }
