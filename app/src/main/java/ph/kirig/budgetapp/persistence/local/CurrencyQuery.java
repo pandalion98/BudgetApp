@@ -7,7 +7,9 @@
 
 package ph.kirig.budgetapp.persistence.local;
 
-import ph.kirig.budgetapp.persistence.Query;
+import java.util.ArrayList;
+
+import ph.kirig.budgetapp.persistence.SqlQuery;
 
 import static ph.kirig.budgetapp.persistence.local.LocalSQLite.DbContract.CURR_COLUMN_ABBREV;
 import static ph.kirig.budgetapp.persistence.local.LocalSQLite.DbContract.CURR_COLUMN_NAME;
@@ -23,7 +25,7 @@ import static ph.kirig.budgetapp.persistence.local.LocalSQLite.DbContract.TABLE_
  */
 
 
-public class CurrencyQuery implements Query {
+public class CurrencyQuery implements SqlQuery {
     private String uuid, name, abbrev, symbol;
 
     public CurrencyQuery() {
@@ -50,53 +52,112 @@ public class CurrencyQuery implements Query {
         return this;
     }
 
-    @Override
-    public String generate() {
-        String query = "SELECT * FROM " + TABLE_CURRENCY + " ";
+//    @Override
+//    public String generateFull() {
+//        String query = "SELECT * FROM " + TABLE_CURRENCY + " ";
+//
+//        boolean appendedWhere = false;
+//
+//        if (uuid != null) {
+//            query += "WHERE ";
+//            appendedWhere = true;
+//            query += CURR_COLUMN_UUID + " = " + "\'" + uuid + "\'";
+//        }
+//
+//        if (name != null) {
+//            query += appendedWhere ? "OR " : "WHERE ";
+//            if (!appendedWhere) {
+//                appendedWhere = true;
+//            }
+//
+//            query += CURR_COLUMN_NAME + " LIKE " + "\'" + name + "%\'";
+//        }
+//
+//        if (abbrev != null) {
+//            query += appendedWhere ? "OR " : "WHERE ";
+//            if (!appendedWhere) {
+//                appendedWhere = true;
+//            }
+//
+//            query += CURR_COLUMN_ABBREV + " LIKE " + "\'" + abbrev + "%\'";
+//        }
+//
+//        if (symbol != null) {
+//            query += appendedWhere ? "OR " : "WHERE ";
+////            if (!appendedWhere) {
+////                // TODO: Uncomment and follow pattern if more of these clauses exist
+////                appendedWhere = true;
+////            }
+//
+//            query += CURR_COLUMN_SYMBOL + " LIKE " + "\'" + symbol + "%\'";
+//        }
+//
+//        return query.trim();
+//    }
 
+    @Override
+    public String generateSqlPreparedStatement() {
+        String query = "SELECT * FROM " + TABLE_CURRENCY + " ";
         boolean appendedWhere = false;
 
         if (uuid != null) {
             query += "WHERE ";
             appendedWhere = true;
-            query += CURR_COLUMN_UUID + " = " + "\'" + uuid + "\'";
+            query += CURR_COLUMN_UUID + " = ?";
         }
 
         if (name != null) {
+            query += appendedWhere ? "OR " : "WHERE ";
             if (!appendedWhere) {
-                query += "WHERE ";
                 appendedWhere = true;
-            } else {
-                query += "OR ";
             }
 
-            query += CURR_COLUMN_NAME + " LIKE " + "\'" + name + "%\'";
+            query += CURR_COLUMN_NAME + " LIKE ?";
         }
 
         if (abbrev != null) {
+            query += appendedWhere ? "OR " : "WHERE ";
             if (!appendedWhere) {
-                query += "WHERE ";
                 appendedWhere = true;
-            } else {
-                query += "OR ";
             }
 
-            query += CURR_COLUMN_ABBREV + " LIKE " + "\'" + abbrev + "%\'";
+            query += CURR_COLUMN_ABBREV + " LIKE ?";
         }
 
         if (symbol != null) {
-            if (!appendedWhere) {
-                query += "WHERE ";
-                // TODO: Uncomment and follow pattern if more of these clauses exist
-                // appendedWhere = true;
-            } else {
-                query += "OR ";
-            }
+            query += appendedWhere ? "OR " : "WHERE ";
+//            if (!appendedWhere) {
+//                // TODO: Uncomment and follow pattern if more of these clauses exist
+//                appendedWhere = true;
+//            }
 
-            query += CURR_COLUMN_SYMBOL + " LIKE " + "\'" + symbol + "%\'";
+            query += CURR_COLUMN_SYMBOL + " LIKE ?";
         }
 
         return query.trim();
+    }
+
+    @Override
+    public String[] generateSelectionArgs() {
+        ArrayList<String> buffer = new ArrayList<>();
+        if (uuid != null) {
+            buffer.add(uuid);
+        }
+
+        if (name != null) {
+            buffer.add(name);
+        }
+
+        if (abbrev != null) {
+            buffer.add(abbrev);
+        }
+
+        if (symbol != null) {
+            buffer.add(symbol);
+        }
+
+        // Why 0? https://shipilev.net/blog/2016/arrays-wisdom-ancients/
+        return buffer.toArray(new String[0]);
     }
 }
 

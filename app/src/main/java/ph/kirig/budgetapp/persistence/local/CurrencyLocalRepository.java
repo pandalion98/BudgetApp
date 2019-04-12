@@ -1,3 +1,10 @@
+/*
+ * Copyright (c) 2019 Kirig Technologies. All rights reserved.
+ *
+ * This document is considered proprietary and confidential. It may not be stored, reproduced,
+ * or transmitted by any means without express written permission from Kirig Technologies.
+ */
+
 package ph.kirig.budgetapp.persistence.local;
 
 import android.content.ContentValues;
@@ -9,8 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ph.kirig.budgetapp.models.Currency;
-import ph.kirig.budgetapp.persistence.Query;
 import ph.kirig.budgetapp.persistence.Repository;
+import ph.kirig.budgetapp.persistence.SqlQuery;
 
 import static ph.kirig.budgetapp.persistence.local.LocalSQLite.DbContract.CURR_COLUMN_ABBREV;
 import static ph.kirig.budgetapp.persistence.local.LocalSQLite.DbContract.CURR_COLUMN_NAME;
@@ -74,8 +81,8 @@ public class CurrencyLocalRepository implements Repository<Currency> {
     }
 
     @Override
-    public List<Currency> query(Query q) {
-        Cursor cur = db.rawQuery(q.generate(), null);
+    public List<Currency> query(SqlQuery q) {
+        Cursor cur = db.rawQuery(q.generateSqlPreparedStatement(), q.generateSelectionArgs());
 
         ArrayList<Currency> buffer = new ArrayList<>();
 
