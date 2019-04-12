@@ -40,4 +40,9 @@
     <string name="toast_curr_symb_empty">Symbol cannot be empty</string>
     <string name="title_currency_list">Currencies</string>
     <string name="title_currency_detail">Currency Detail</string>
+    <string name="hint_acct_name">Account Name (e.g. My Savings Account)</string>
+    <string name="hint_acct_currency">Account Currency</string>
+    <string name="btn_commit_acct">BtnCommitAcct</string>
+    <string name="toast_acct_name_blank">Account name cannot be blank</string>
+    <string name="toast_acct_curr_blank">Please pick a currency</string>
 </resources>

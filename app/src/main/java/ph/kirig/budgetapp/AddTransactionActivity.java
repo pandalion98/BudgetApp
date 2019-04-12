@@ -27,6 +27,8 @@ import java.util.UUID;
 import androidx.appcompat.app.AppCompatActivity;
 import ph.kirig.budgetapp.models.Account;
 import ph.kirig.budgetapp.models.TransactionRecord;
+import ph.kirig.budgetapp.persistence.local.AccountLocalRepository;
+import ph.kirig.budgetapp.persistence.local.AccountQuery;
 
 public class AddTransactionActivity extends AppCompatActivity {
 
@@ -41,7 +43,7 @@ public class AddTransactionActivity extends AppCompatActivity {
 
         etAmount = findViewById(R.id.edittext_tx_amt);
         etNote = findViewById(R.id.edittext_tx_note);
-        spinnerAccount = findViewById(R.id.spinner_account);
+        spinnerAccount = findViewById(R.id.spinner_account_select);
         btnCommitTx = findViewById(R.id.btn_commit_tx);
 
         btnCommitTx.setOnClickListener(new View.OnClickListener() {
@@ -50,6 +52,14 @@ public class AddTransactionActivity extends AppCompatActivity {
                 commitTx();
             }
         });
+
+        AccountLocalRepository aclr = new AccountLocalRepository(AddTransactionActivity.this);
+        final List<Account> accounts = aclr.query(new AccountQuery());
+
+        AccountAdapter accountAdapter =
+                new AccountAdapter(AddTransactionActivity.this, accounts);
+
+        spinnerAccount.setAdapter(accountAdapter);
     }
 
     private void commitTx() {
@@ -65,8 +75,9 @@ public class AddTransactionActivity extends AppCompatActivity {
         private Context ctx;
         private List<Account> accountList;
 
-        public AccountAdapter(Context context) {
+        public AccountAdapter(Context context, List<Account> accountList) {
             ctx = context;
+            this.accountList = accountList;
         }
 
         @Override
@@ -93,7 +104,7 @@ public class AddTransactionActivity extends AppCompatActivity {
                 convertView = LayoutInflater.from(ctx).inflate(R.layout.tx_spinner_accounts, parent, false);
 
                 holder = new ViewHolder();
-                holder.accountName = convertView.findViewById(R.id.title);
+                holder.accountName = convertView.findViewById(R.id.tv_account);
 
                 convertView.setTag(holder);
             } else {
