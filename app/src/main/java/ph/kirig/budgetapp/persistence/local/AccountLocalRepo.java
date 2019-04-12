@@ -42,9 +42,9 @@ public class AccountLocalRepo implements Repository<Account> {
     public void add(Account item) {
         ContentValues insertValues = new ContentValues();
         insertValues.put(ACCT_COLUMN_UUID, item.getUuid());
-        insertValues.put(ACCT_COLUMN_CURRENCY_UUID, item.currencyUuid);
-        insertValues.put(ACCT_COLUMN_NAME, item.accountName);
-        insertValues.put(ACCT_COLUMN_ACCOUNT_METADATA, item.accountMetadata);
+        insertValues.put(ACCT_COLUMN_CURRENCY_UUID, item.getCurrencyUuid());
+        insertValues.put(ACCT_COLUMN_NAME, item.getName());
+        insertValues.put(ACCT_COLUMN_ACCOUNT_METADATA, item.getMetadata());
         db.insert(TABLE_ACCT, null, insertValues);
     }
 
@@ -52,9 +52,9 @@ public class AccountLocalRepo implements Repository<Account> {
     public void update(Account item) {
         ContentValues values = new ContentValues();
         values.put(ACCT_COLUMN_UUID, item.getUuid());
-        values.put(ACCT_COLUMN_CURRENCY_UUID, item.currencyUuid);
-        values.put(ACCT_COLUMN_NAME, item.accountName);
-        values.put(ACCT_COLUMN_ACCOUNT_METADATA, item.accountMetadata);
+        values.put(ACCT_COLUMN_CURRENCY_UUID, item.getCurrencyUuid());
+        values.put(ACCT_COLUMN_NAME, item.getName());
+        values.put(ACCT_COLUMN_ACCOUNT_METADATA, item.getMetadata());
 
         db.update(TABLE_ACCT, values,
                 ACCT_COLUMN_UUID + " = ?", new String[]{item.getUuid()});
@@ -74,9 +74,9 @@ public class AccountLocalRepo implements Repository<Account> {
 
         while (cur.moveToNext()) {
             Account e = new Account(cur.getString(cur.getColumnIndex(ACCT_COLUMN_UUID)));
-            e.accountName = cur.getString(cur.getColumnIndex(ACCT_COLUMN_NAME));
-            e.currencyUuid = cur.getString(cur.getColumnIndex(ACCT_COLUMN_CURRENCY_UUID));
-            e.accountMetadata = cur.getString(cur.getColumnIndex(ACCT_COLUMN_ACCOUNT_METADATA));
+            e.setName(cur.getString(cur.getColumnIndex(ACCT_COLUMN_NAME)));
+            e.setCurrencyUuid(cur.getString(cur.getColumnIndex(ACCT_COLUMN_CURRENCY_UUID)));
+            e.setMetadata(cur.getString(cur.getColumnIndex(ACCT_COLUMN_ACCOUNT_METADATA)));
 
             buffer.add(e);
         }

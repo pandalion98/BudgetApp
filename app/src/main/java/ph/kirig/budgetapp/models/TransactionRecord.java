@@ -1,3 +1,10 @@
+/*
+ * Copyright (c) 2019 Kirig Technologies. All rights reserved.
+ *
+ * This document is considered proprietary and confidential. It may not be stored, reproduced,
+ * or transmitted by any means without express written permission from Kirig Technologies.
+ */
+
 package ph.kirig.budgetapp.models;
 
 import java.math.BigDecimal;
@@ -11,15 +18,15 @@ import java.util.UUID;
 
 
 public class TransactionRecord {
+    private String txUuid;
+    private String ownerAccount;
+    private String txDescription;
 
-    public String txUUID;
-    public String ownerAccount;
-    public String txDescription;
-
-    public BigDecimal txAmount;
+    private BigDecimal txAmount;
+    private long timeMillis;
 
     public TransactionRecord() {
-        txUUID = UUID.randomUUID().toString();
+        txUuid = UUID.randomUUID().toString();
     }
 
 
@@ -51,7 +58,7 @@ public class TransactionRecord {
 
 
     public String getUUID() {
-        return txUUID;
+        return txUuid;
     }
 
     public TransactionRecord getValidatedTxRecord() throws Exception {

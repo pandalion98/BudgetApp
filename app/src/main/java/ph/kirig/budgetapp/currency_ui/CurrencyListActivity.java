@@ -133,7 +133,7 @@ public class CurrencyListActivity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(final ViewHolder holder, int position) {
-            holder.mIdView.setText(mValues.get(position).abbreviation);
+            holder.mIdView.setText(mValues.get(position).getAbbreviation());
             holder.mContentView.setText(mValues.get(position).getUuid());
 
             holder.itemView.setTag(mValues.get(position));

@@ -42,20 +42,20 @@ public class CurrencyLocalRepo implements Repository<Currency> {
     public void add(Currency item) {
         ContentValues insertValues = new ContentValues();
         insertValues.put(CURR_COLUMN_UUID, item.getUuid());
-        insertValues.put(CURR_COLUMN_NUMERIC_SCALE, item.numeric_scale);
-        insertValues.put(CURR_COLUMN_NAME, item.full_name);
-        insertValues.put(CURR_COLUMN_ABBREV, item.abbreviation);
-        insertValues.put(CURR_COLUMN_SYMBOL, item.symbol);
+        insertValues.put(CURR_COLUMN_NUMERIC_SCALE, item.getNumericScale());
+        insertValues.put(CURR_COLUMN_NAME, item.getFullName());
+        insertValues.put(CURR_COLUMN_ABBREV, item.getAbbreviation());
+        insertValues.put(CURR_COLUMN_SYMBOL, item.getSymbol());
         db.insert(TABLE_CURRENCY, null, insertValues);
     }
 
     @Override
     public void update(Currency item) {
         ContentValues values = new ContentValues();
-        values.put(CURR_COLUMN_NUMERIC_SCALE, item.numeric_scale);
-        values.put(CURR_COLUMN_NAME, item.full_name);
-        values.put(CURR_COLUMN_ABBREV, item.abbreviation);
-        values.put(CURR_COLUMN_SYMBOL, item.symbol);
+        values.put(CURR_COLUMN_NUMERIC_SCALE, item.getNumericScale());
+        values.put(CURR_COLUMN_NAME, item.getFullName());
+        values.put(CURR_COLUMN_ABBREV, item.getAbbreviation());
+        values.put(CURR_COLUMN_SYMBOL, item.getSymbol());
 
         db.update(TABLE_CURRENCY, values,
                 CURR_COLUMN_UUID + " = ?", new String[]{item.getUuid()});
@@ -75,10 +75,10 @@ public class CurrencyLocalRepo implements Repository<Currency> {
 
         while (cur.moveToNext()) {
             Currency e = new Currency(cur.getString(cur.getColumnIndex(CURR_COLUMN_UUID)));
-            e.full_name = cur.getString(cur.getColumnIndex(CURR_COLUMN_NAME));
-            e.abbreviation = cur.getString(cur.getColumnIndex(CURR_COLUMN_ABBREV));
-            e.symbol = cur.getString(cur.getColumnIndex(CURR_COLUMN_SYMBOL));
-            e.numeric_scale = cur.getInt(cur.getColumnIndex(CURR_COLUMN_NUMERIC_SCALE));
+            e.setFullName(cur.getString(cur.getColumnIndex(CURR_COLUMN_NAME)));
+            e.setAbbreviation(cur.getString(cur.getColumnIndex(CURR_COLUMN_ABBREV)));
+            e.setSymbol(cur.getString(cur.getColumnIndex(CURR_COLUMN_SYMBOL)));
+            e.setNumericScale(cur.getInt(cur.getColumnIndex(CURR_COLUMN_NUMERIC_SCALE)));
 
             buffer.add(e);
         }

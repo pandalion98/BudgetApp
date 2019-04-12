@@ -75,8 +75,8 @@ public class AddAccountActivity extends AppCompatActivity {
         }
 
         Account account = new Account();
-        account.accountName = accountName;
-        account.currencyUuid = currency.getUuid();
+        account.setName(accountName);
+        account.setCurrencyUuid(currency.getUuid());
 
         AccountLocalRepo aclr = new AccountLocalRepo(AddAccountActivity.this);
         aclr.add(account);
@@ -128,7 +128,7 @@ public class AddAccountActivity extends AppCompatActivity {
                 holder = (ViewHolder) convertView.getTag();
             }
 
-            holder.currencyText.setText(currencyList.get(position).full_name);
+            holder.currencyText.setText(currencyList.get(position).getFullName());
             return convertView;
         }
 

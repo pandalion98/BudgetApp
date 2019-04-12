@@ -111,7 +111,7 @@ public class AddTransactionActivity extends AppCompatActivity {
                 holder = (ViewHolder) convertView.getTag();
             }
 
-            holder.accountName.setText(accountList.get(position).accountName);
+            holder.accountName.setText(accountList.get(position).getName());
             return convertView;
         }
 

@@ -17,20 +17,48 @@ import java.util.UUID;
 
 
 public class Account {
-    public String accountName;
-    public String currencyUuid;
-    public String accountMetadata;
-    private String accountUuid;
+    private String name;
+    private String currencyUuid;
+    private String metadata;
+    private String uuid;
 
     public Account() {
-        accountUuid = UUID.randomUUID().toString();
+        uuid = UUID.randomUUID().toString();
     }
 
     public Account(String uuid) {
-        accountUuid = uuid;
+        this.uuid = uuid;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getCurrencyUuid() {
+        return currencyUuid;
+    }
+
+    public void setCurrencyUuid(String currencyUuid) {
+        this.currencyUuid = currencyUuid;
+    }
+
+    public String getMetadata() {
+        return metadata;
+    }
+
+    public void setMetadata(String metadata) {
+        this.metadata = metadata;
     }
 
     public String getUuid() {
-        return accountUuid;
+        return uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
 }
