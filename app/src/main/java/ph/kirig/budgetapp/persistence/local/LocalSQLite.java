@@ -1,3 +1,10 @@
+/*
+ * Copyright (c) 2019 Kirig Technologies. All rights reserved.
+ *
+ * This document is considered proprietary and confidential. It may not be stored, reproduced,
+ * or transmitted by any means without express written permission from Kirig Technologies.
+ */
+
 package ph.kirig.budgetapp.persistence.local;
 
 import android.content.Context;
@@ -56,9 +63,9 @@ public class LocalSQLite extends SQLiteOpenHelper {
         String create_record_table =
                 "CREATE TABLE " + DbContract.TABLE_RECORDS + " (" +
                         DbContract.REC_COLUMN_UUID + " TEXT NOT NULL PRIMARY KEY UNIQUE," +
-                        DbContract.REC_COLUMN_AMOUNT_SIGNED + " INTEGER," +
-                        DbContract.ACCT_COLUMN_CURRENCY_UUID + " TEXT," +
-                        DbContract.ACCT_COLUMN_ACCOUNT_METADATA + " TEXT)";
+                        DbContract.REC_COLUMN_TIME + " INTEGER," +
+                        DbContract.REC_COLUMN_CATEGORY + " TEXT," +
+                        DbContract.REC_COLUMN_AMOUNT + " TEXT)";
         db.execSQL(create_record_table);
     }
 
@@ -88,8 +95,8 @@ public class LocalSQLite extends SQLiteOpenHelper {
 
         static final String TABLE_RECORDS = "tbl_record";
         static final String REC_COLUMN_UUID = "record_uuid";
-        static final String REC_COLUMN_AMOUNT_SIGNED = "title";
-        static final String COLUMN_NAME_SUBTITLE = "subtitle";
+        static final String REC_COLUMN_TIME = "time";
+        static final String REC_COLUMN_CATEGORY = "category";
+        static final String REC_COLUMN_AMOUNT = "amount";
     }
-
 }

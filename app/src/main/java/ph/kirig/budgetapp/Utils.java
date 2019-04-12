@@ -5,18 +5,12 @@
  * or transmitted by any means without express written permission from Kirig Technologies.
  */
 
-package ph.kirig.budgetapp.models;
+package ph.kirig.budgetapp;
 
 /**
- * Created by Gene on 04/04/2019.
+ * Created by Gene on 12/04/2019.
  * Kirig Technologies
  * gene(at)kirig.ph
  */
-public class MonetaryUnit {
-    private long numericScale = 0;
-    private long value;
-
-    Currency currencyUnitUuid;
-
-
+public class Utils {
 }

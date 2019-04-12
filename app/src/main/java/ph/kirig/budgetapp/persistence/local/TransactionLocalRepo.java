@@ -7,11 +7,21 @@
 
 package ph.kirig.budgetapp.persistence.local;
 
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+
 import java.util.List;
 
 import ph.kirig.budgetapp.models.TransactionRecord;
 import ph.kirig.budgetapp.persistence.Repository;
 import ph.kirig.budgetapp.persistence.SqlPreparedQuery;
+
+import static ph.kirig.budgetapp.persistence.local.LocalSQLite.DbContract.REC_COLUMN_AMOUNT;
+import static ph.kirig.budgetapp.persistence.local.LocalSQLite.DbContract.REC_COLUMN_CATEGORY;
+import static ph.kirig.budgetapp.persistence.local.LocalSQLite.DbContract.REC_COLUMN_TIME;
+import static ph.kirig.budgetapp.persistence.local.LocalSQLite.DbContract.REC_COLUMN_UUID;
+import static ph.kirig.budgetapp.persistence.local.LocalSQLite.DbContract.TABLE_RECORDS;
 
 
 /**
@@ -20,8 +30,20 @@ import ph.kirig.budgetapp.persistence.SqlPreparedQuery;
  * gene(at)kirig.ph
  */
 public class TransactionLocalRepo implements Repository<TransactionRecord> {
+    private SQLiteDatabase db;
+
+    public TransactionLocalRepo(Context ctx) {
+        db = LocalSQLite.getInstance(ctx.getApplicationContext()).getWritableDatabase();
+    }
+
     @Override
     public void add(TransactionRecord item) {
+        ContentValues insertValues = new ContentValues();
+        insertValues.put(REC_COLUMN_UUID, item.getUuid());
+        insertValues.put(REC_COLUMN_AMOUNT, item.getTxAmountString());
+        insertValues.put(REC_COLUMN_CATEGORY, item.getTxCategory());
+        insertValues.put(REC_COLUMN_TIME, item.getTimeMillis());
+        db.insert(TABLE_RECORDS, null, insertValues);
 
     }
 

@@ -16,21 +16,44 @@ import java.util.UUID;
  * gene(at)kirig.ph
  */
 
-
+// TODO: Set up validation in the future, especially with API stuff.
 public class TransactionRecord {
-    private String txUuid;
+    private String uuid;
     private String ownerAccount;
     private String txDescription;
+    private String txCategory;
+
+    public TransactionRecord() {
+        uuid = UUID.randomUUID().toString();
+    }
+
+    public String getTxCategory() {
+        return txCategory;
+    }
 
     private BigDecimal txAmount;
     private long timeMillis;
 
-    public TransactionRecord() {
-        txUuid = UUID.randomUUID().toString();
+    public void setTxCategory(String txCategory) {
+        this.txCategory = txCategory;
     }
 
+    public String getUuid() {
+        return uuid;
+    }
 
-    // Getters and setters. TODO: Set up validation in the future, especially with API stuff.
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
+    }
+
+    public long getTimeMillis() {
+        return timeMillis;
+    }
+
+    public void setTimeMillis(long timeMillis) {
+        this.timeMillis = timeMillis;
+    }
+
     public String getOwnerAccount() {
         return ownerAccount;
     }
@@ -48,17 +71,20 @@ public class TransactionRecord {
     }
 
 
-    public BigDecimal getTxAmount() {
+    public BigDecimal getTxAmountNum() {
         return txAmount;
     }
 
-    public void setTxAmount(BigDecimal txAmount) {
+    public void setTxAmountNum(BigDecimal txAmount) {
         this.txAmount = txAmount;
     }
 
+    public String getTxAmountString() {
+        return txAmount.toPlainString();
+    }
 
-    public String getUUID() {
-        return txUuid;
+    public void setTxAmountString(String txAmount) {
+        this.txAmount = new BigDecimal(txAmount);
     }
 
     public TransactionRecord getValidatedTxRecord() throws Exception {

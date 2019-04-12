@@ -67,7 +67,7 @@ public class AddTransactionActivity extends AppCompatActivity {
         TransactionRecord transactionRecord = new TransactionRecord();
 
         transactionRecord.setOwnerAccount(((Account) spinnerAccount.getSelectedItem()).getUuid());
-        transactionRecord.setTxAmount(new BigDecimal(etAmount.getText().toString()));
+        transactionRecord.setTxAmountNum(new BigDecimal(etAmount.getText().toString()));
 
     }
 
