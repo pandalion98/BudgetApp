@@ -40,8 +40,8 @@ public class TransactionLocalRepo implements Repository<TransactionRecord> {
     public void add(TransactionRecord item) {
         ContentValues insertValues = new ContentValues();
         insertValues.put(REC_COLUMN_UUID, item.getUuid());
-        insertValues.put(REC_COLUMN_AMOUNT, item.getTxAmountString());
-        insertValues.put(REC_COLUMN_CATEGORY, item.getTxCategory());
+        insertValues.put(REC_COLUMN_AMOUNT, item.getTxAmount().toPlainString());
+        insertValues.put(REC_COLUMN_CATEGORY, item.getCategory());
         insertValues.put(REC_COLUMN_TIME, item.getTimeMillis());
         db.insert(TABLE_RECORDS, null, insertValues);
 

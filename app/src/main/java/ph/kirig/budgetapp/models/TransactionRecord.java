@@ -10,6 +10,11 @@ package ph.kirig.budgetapp.models;
 import java.math.BigDecimal;
 import java.util.UUID;
 
+import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 /**
  * Created by Gene on 15/03/2019.
  * Kirig Technologies
@@ -17,32 +22,57 @@ import java.util.UUID;
  */
 
 // TODO: Set up validation in the future, especially with API stuff.
-public class TransactionRecord {
-    private String uuid;
-    private String ownerAccount;
-    private String txDescription;
-    private String txCategory;
 
+@Entity
+public class TransactionRecord {
+    @PrimaryKey
+    @NonNull
+    @ColumnInfo(name = "record_uuid", typeAffinity = ColumnInfo.TEXT)
+    private String uuid;
+
+    // Amount in base units (e.g. PHP centavo, BTC Satoshi, etc.)
+    @ColumnInfo(name = "time_epoch", typeAffinity = ColumnInfo.REAL)
+    private long timeMillis;
+
+    // Amount in base units (e.g. PHP centavo, BTC Satoshi, etc.)
+    @ColumnInfo(name = "amount", typeAffinity = ColumnInfo.REAL)
+    private BigDecimal txAmount;
+
+    @ColumnInfo(name = "owner_account_uuid", typeAffinity = ColumnInfo.TEXT)
+    private String ownerAccount;
+
+    @ColumnInfo(name = "category", typeAffinity = ColumnInfo.TEXT)
+    private String category;
+
+    @ColumnInfo(name = "description", typeAffinity = ColumnInfo.TEXT)
+    private String descriptionText;
+
+
+    // ctors
+    // Fresh new tx
     public TransactionRecord() {
         uuid = UUID.randomUUID().toString();
     }
 
-    public String getTxCategory() {
-        return txCategory;
+    // Instantiated from persistence
+    public TransactionRecord(@NonNull String uuid, long timeMillis, BigDecimal txAmount,
+                             String ownerAccount, String category, String descriptionText) {
+        this.uuid = uuid;
+        this.timeMillis = timeMillis;
+        this.txAmount = txAmount;
+        this.ownerAccount = ownerAccount;
+        this.category = category;
+        this.descriptionText = descriptionText;
     }
 
-    private BigDecimal txAmount;
-    private long timeMillis;
-
-    public void setTxCategory(String txCategory) {
-        this.txCategory = txCategory;
-    }
-
+    // Getters
+    @NonNull
     public String getUuid() {
         return uuid;
     }
 
-    public void setUuid(String uuid) {
+    // Setters
+    public void setUuid(@NonNull String uuid) {
         this.uuid = uuid;
     }
 
@@ -62,37 +92,29 @@ public class TransactionRecord {
         this.ownerAccount = ownerAccount;
     }
 
-    public String getTxDescription() {
-        return txDescription;
+    public String getCategory() {
+        return category;
     }
 
-    public void setTxDescription(String txDescription) {
-        this.txDescription = txDescription;
+    public void setCategory(String category) {
+        this.category = category;
     }
 
+    public String getDescriptionText() {
+        return descriptionText;
+    }
 
-    public BigDecimal getTxAmountNum() {
+    public void setDescriptionText(String desc) {
+        this.descriptionText = desc;
+    }
+
+    // toPlainString ONLY
+    public BigDecimal getTxAmount() {
         return txAmount;
     }
 
-    public void setTxAmountNum(BigDecimal txAmount) {
+    public void setTxAmount(BigDecimal txAmount) {
         this.txAmount = txAmount;
-    }
-
-    public String getTxAmountString() {
-        return txAmount.toPlainString();
-    }
-
-    public void setTxAmountString(String txAmount) {
-        this.txAmount = new BigDecimal(txAmount);
-    }
-
-    public TransactionRecord getValidatedTxRecord() throws Exception {
-        if (txAmount.equals(new BigDecimal(0))) {
-            throw new Exception();
-        }
-
-        return this;
     }
 }
 
