@@ -74,12 +74,13 @@ public class CurrencyLocalRepo implements Repository<Currency> {
         ArrayList<Currency> buffer = new ArrayList<>();
 
         while (cur.moveToNext()) {
-            Currency e = new Currency(cur.getString(cur.getColumnIndex(CURR_COLUMN_UUID)));
-            e.setFullName(cur.getString(cur.getColumnIndex(CURR_COLUMN_NAME)));
-            e.setAbbreviation(cur.getString(cur.getColumnIndex(CURR_COLUMN_ABBREV)));
-            e.setSymbol(cur.getString(cur.getColumnIndex(CURR_COLUMN_SYMBOL)));
-            e.setNumericScale(cur.getInt(cur.getColumnIndex(CURR_COLUMN_NUMERIC_SCALE)));
+            String uuid = cur.getString(cur.getColumnIndex(CURR_COLUMN_UUID));
+            String fullName = cur.getString(cur.getColumnIndex(CURR_COLUMN_NAME));
+            String abbrev = cur.getString(cur.getColumnIndex(CURR_COLUMN_ABBREV));
+            String symb = cur.getString(cur.getColumnIndex(CURR_COLUMN_SYMBOL));
+            int scale = cur.getInt(cur.getColumnIndex(CURR_COLUMN_NUMERIC_SCALE));
 
+            Currency e = new Currency(uuid, fullName, abbrev, symb, scale);
             buffer.add(e);
         }
 

@@ -9,62 +9,69 @@ package ph.kirig.budgetapp.models;
 
 import java.util.UUID;
 
+import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 /**
  * Created by Gene on 01/04/2019.
  * Kirig Technologies
  * gene(at)kirig.ph
  */
 
+@Entity
 public class Currency {
+    @PrimaryKey
+    @NonNull
+    @ColumnInfo(name = "currency_uuid", typeAffinity = ColumnInfo.TEXT)
+    private final String uuid;
 
-    private String fullName;
-    private String abbreviation;
-    private String symbol;
-    private int numericScale;
-    private String uuid;
+    @ColumnInfo(name = "full_name", typeAffinity = ColumnInfo.TEXT)
+    private final String fullName;
 
-    public Currency() {
+    @ColumnInfo(name = "abbreviation", typeAffinity = ColumnInfo.TEXT)
+    private final String abbreviation;
+
+    @ColumnInfo(name = "symbol", typeAffinity = ColumnInfo.TEXT)
+    private final String symbol;
+
+    @ColumnInfo(name = "numeric_scale", typeAffinity = ColumnInfo.INTEGER)
+    private final int numericScale;
+
+    // Fresh, new currency
+    public Currency(String fullName, String abbreviation, String symbol, int numericScale) {
         uuid = UUID.randomUUID().toString();
+        this.fullName = fullName;
+        this.abbreviation = abbreviation;
+        this.symbol = symbol;
+        this.numericScale = numericScale;
     }
 
-    public Currency(String uuid) {
+    // Instantiating from persistence
+    public Currency(@NonNull String uuid,
+                    String fullName, String abbreviation, String symbol, int numericScale) {
         this.uuid = uuid;
+        this.fullName = fullName;
+        this.abbreviation = abbreviation;
+        this.symbol = symbol;
+        this.numericScale = numericScale;
     }
 
     public String getFullName() {
         return fullName;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
     public String getAbbreviation() {
         return abbreviation;
-    }
-
-    public void setAbbreviation(String abbreviation) {
-        this.abbreviation = abbreviation;
     }
 
     public String getSymbol() {
         return symbol;
     }
 
-    public void setSymbol(String symbol) {
-        this.symbol = symbol;
-    }
-
     public int getNumericScale() {
         return numericScale;
-    }
-
-    public void setNumericScale(int numericScale) {
-        this.numericScale = numericScale;
-    }
-
-    public void setUuid(String uuid) {
-        this.uuid = uuid;
     }
 
     public String getUuid() {

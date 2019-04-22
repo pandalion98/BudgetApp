@@ -91,12 +91,7 @@ public class AddCurrencyActivity extends AppCompatActivity {
             return;
         }
 
-        Currency c = new Currency();
-        c.setFullName(currFullName.trim());
-        c.setAbbreviation(abbrv.trim());
-        c.setSymbol(symb.trim());
-        c.setNumericScale(scale);
-
+        Currency c = new Currency(currFullName.trim(), abbrv.trim(), symb.trim(), scale);
         repository.add(c);
     }
 
