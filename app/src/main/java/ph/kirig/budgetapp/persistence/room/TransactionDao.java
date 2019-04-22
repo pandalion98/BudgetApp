@@ -7,10 +7,13 @@
 
 package ph.kirig.budgetapp.persistence.room;
 
+import java.util.List;
+
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
+import androidx.room.Query;
 import androidx.room.Update;
 import ph.kirig.budgetapp.models.TransactionRecord;
 
@@ -30,4 +33,18 @@ public interface TransactionDao {
 
     @Delete
     void delete(TransactionRecord account);
+
+    @Query("SELECT * FROM TransactionRecord")
+    List<TransactionRecord> getAll();
+
+    @Query("SELECT * FROM TransactionRecord WHERE time_epoch BETWEEN :from AND :to")
+    List<TransactionRecord> getAllBetweenDates(long from, long to);
+
+    @Query("SELECT * FROM TransactionRecord WHERE time_epoch BETWEEN :timeFrom AND :timeTo " +
+            "AND owner_account_uuid = :accountUuid")
+    List<TransactionRecord> getByAccount(long timeFrom, long timeTo, String accountUuid);
+
+    @Query("SELECT * FROM TransactionRecord WHERE time_epoch BETWEEN :timeFrom AND :timeTo " +
+            "AND description LIKE :queryString")
+    List<TransactionDao> searchByString(long timeFrom, long timeTo, String queryString);
 }

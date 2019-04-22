@@ -65,13 +65,11 @@ public class TransactionRecord {
         this.descriptionText = descriptionText;
     }
 
-    // Getters
     @NonNull
     public String getUuid() {
         return uuid;
     }
 
-    // Setters
     public void setUuid(@NonNull String uuid) {
         this.uuid = uuid;
     }

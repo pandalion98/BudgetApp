@@ -9,25 +9,50 @@ package ph.kirig.budgetapp.models;
 
 import java.util.UUID;
 
+import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 /**
  * Created by Gene on 31/03/2019.
  * Kirig Technologies
  * gene(at)kirig.ph
  */
 
-
+@Entity
 public class Account {
-    private String name;
-    private String currencyUuid;
-    private String metadata;
+    @PrimaryKey
+    @NonNull
+    @ColumnInfo(name = "account_uuid", typeAffinity = ColumnInfo.TEXT)
     private String uuid;
 
+    @ColumnInfo(name = "account_name", typeAffinity = ColumnInfo.TEXT)
+    private String name;
+
+    @ColumnInfo(name = "currency_uuid", typeAffinity = ColumnInfo.TEXT)
+    private String currencyUuid;
+
+    @ColumnInfo(name = "metadata", typeAffinity = ColumnInfo.TEXT)
+    private String metadata;
+
+    // ctors
+    // Fresh new account
     public Account() {
         uuid = UUID.randomUUID().toString();
     }
 
-    public Account(String uuid) {
+    // Account from persistence
+    public Account(@NonNull String uuid, String name, String currencyUuid, String metadata) {
         this.uuid = uuid;
+        this.name = name;
+        this.currencyUuid = currencyUuid;
+        this.metadata = metadata;
+    }
+
+    @NonNull
+    public String getUuid() {
+        return uuid;
     }
 
     public String getName() {
@@ -52,13 +77,5 @@ public class Account {
 
     public void setMetadata(String metadata) {
         this.metadata = metadata;
-    }
-
-    public String getUuid() {
-        return uuid;
-    }
-
-    public void setUuid(String uuid) {
-        this.uuid = uuid;
     }
 }
