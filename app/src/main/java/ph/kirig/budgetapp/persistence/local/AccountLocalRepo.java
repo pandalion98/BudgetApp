@@ -73,10 +73,11 @@ public class AccountLocalRepo implements Repository<Account> {
         ArrayList<Account> buffer = new ArrayList<>();
 
         while (cur.moveToNext()) {
-            Account e = new Account(cur.getString(cur.getColumnIndex(ACCT_COLUMN_UUID)));
-            e.setName(cur.getString(cur.getColumnIndex(ACCT_COLUMN_NAME)));
-            e.setCurrencyUuid(cur.getString(cur.getColumnIndex(ACCT_COLUMN_CURRENCY_UUID)));
-            e.setMetadata(cur.getString(cur.getColumnIndex(ACCT_COLUMN_ACCOUNT_METADATA)));
+            String uuid = cur.getString(cur.getColumnIndex(ACCT_COLUMN_UUID));
+            String name = cur.getString(cur.getColumnIndex(ACCT_COLUMN_NAME));
+            String curr = cur.getString(cur.getColumnIndex(ACCT_COLUMN_CURRENCY_UUID));
+            String mdat = cur.getString(cur.getColumnIndex(ACCT_COLUMN_ACCOUNT_METADATA));
+            Account e = new Account(uuid, name, curr, mdat);
 
             buffer.add(e);
         }
