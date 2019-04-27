@@ -19,22 +19,24 @@ import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.List;
 
-import androidx.appcompat.app.AppCompatActivity;
 import ph.kirig.budgetapp.models.Account;
 import ph.kirig.budgetapp.models.Currency;
-import ph.kirig.budgetapp.persistence.local.AccountLocalRepo;
-import ph.kirig.budgetapp.persistence.local.CurrencyLocalRepo;
-import ph.kirig.budgetapp.persistence.local.CurrencyQuery;
+import ph.kirig.budgetapp.persistence.room.AccountDao;
+import ph.kirig.budgetapp.persistence.room.BudgetDb;
+import ph.kirig.budgetapp.persistence.room.CurrencyDao;
 
 public class AddAccountActivity extends AppCompatActivity {
 
     private TextInputEditText accountName;
     private Spinner spinnerCurrency;
     private Button btnCommitAcct;
+    private BudgetDb db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,8 +47,9 @@ public class AddAccountActivity extends AppCompatActivity {
         spinnerCurrency = findViewById(R.id.spinner_account_select);
         btnCommitAcct = findViewById(R.id.btn_commit_acct);
 
-        CurrencyLocalRepo cclr = new CurrencyLocalRepo(AddAccountActivity.this);
-        final List<Currency> currencies = cclr.query(new CurrencyQuery());
+        db = BudgetDb.getInstance(AddAccountActivity.this);
+        CurrencyDao cclr = db.currencyDao();
+        final List<Currency> currencies = cclr.getAll();
 
         CurrencyAdapter currencyAdapter =
                 new CurrencyAdapter(AddAccountActivity.this, currencies);
@@ -78,7 +81,7 @@ public class AddAccountActivity extends AppCompatActivity {
         account.setName(accountName);
         account.setCurrencyUuid(currency.getUuid());
 
-        AccountLocalRepo aclr = new AccountLocalRepo(AddAccountActivity.this);
+        AccountDao aclr = db.accountDao();
         aclr.add(account);
     }
 

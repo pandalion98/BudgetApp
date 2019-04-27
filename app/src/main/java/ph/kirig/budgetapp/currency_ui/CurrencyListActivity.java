@@ -15,19 +15,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.RecyclerView;
 import ph.kirig.budgetapp.R;
 import ph.kirig.budgetapp.models.Currency;
-import ph.kirig.budgetapp.persistence.local.CurrencyLocalRepo;
-import ph.kirig.budgetapp.persistence.local.CurrencyQuery;
+import ph.kirig.budgetapp.persistence.room.BudgetDb;
+import ph.kirig.budgetapp.persistence.room.CurrencyDao;
 
 /**
  * An activity representing a list of Currencies. This activity
@@ -44,6 +45,8 @@ public class CurrencyListActivity extends AppCompatActivity {
      * device.
      */
     private boolean mTwoPane;
+
+    private BudgetDb db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,10 +74,10 @@ public class CurrencyListActivity extends AppCompatActivity {
             mTwoPane = true;
         }
 
-        CurrencyLocalRepo localRepository
-                = new CurrencyLocalRepo(CurrencyListActivity.this);
+        db = BudgetDb.getInstance(CurrencyListActivity.this);
+        CurrencyDao localRepository = db.currencyDao();
 
-        List<Currency> currencyList = localRepository.query(new CurrencyQuery());
+        List<Currency> currencyList = localRepository.getAll();
 
         View recyclerView = findViewById(R.id.currency_list);
         assert recyclerView != null;

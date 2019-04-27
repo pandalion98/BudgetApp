@@ -14,15 +14,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.fragment.app.Fragment;
+
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 import java.util.List;
 
-import androidx.fragment.app.Fragment;
 import ph.kirig.budgetapp.R;
 import ph.kirig.budgetapp.models.Currency;
-import ph.kirig.budgetapp.persistence.local.CurrencyLocalRepo;
-import ph.kirig.budgetapp.persistence.local.CurrencyQuery;
+import ph.kirig.budgetapp.persistence.room.BudgetDb;
+import ph.kirig.budgetapp.persistence.room.CurrencyDao;
 
 /**
  * A fragment representing a single Currency detail screen.
@@ -46,6 +47,9 @@ public class CurrencyDetailFragment extends Fragment {
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
+
+    private BudgetDb db;
+
     public CurrencyDetailFragment() {
     }
 
@@ -58,12 +62,11 @@ public class CurrencyDetailFragment extends Fragment {
             // arguments. In a real-world scenario, use a Loader
             // to load content from a content provider.
 
-            CurrencyLocalRepo localRepository
-                    = new CurrencyLocalRepo(getActivity());
+            db = BudgetDb.getInstance(getActivity());
+            CurrencyDao localRepository = db.currencyDao();
 
             List<Currency> currencyList
-                    = localRepository.query(
-                    new CurrencyQuery().addUuid(getArguments().getString(ARG_ITEM_ID)));
+                    = localRepository.get(getArguments().getString(ARG_ITEM_ID));
 
             mItem = currencyList.get(0);
 

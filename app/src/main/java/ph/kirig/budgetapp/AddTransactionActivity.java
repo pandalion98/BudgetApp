@@ -20,21 +20,23 @@ import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
-import androidx.appcompat.app.AppCompatActivity;
 import ph.kirig.budgetapp.models.Account;
 import ph.kirig.budgetapp.models.TransactionRecord;
-import ph.kirig.budgetapp.persistence.local.AccountLocalRepo;
-import ph.kirig.budgetapp.persistence.local.AccountQuery;
+import ph.kirig.budgetapp.persistence.room.AccountDao;
+import ph.kirig.budgetapp.persistence.room.BudgetDb;
 
 public class AddTransactionActivity extends AppCompatActivity {
 
     private EditText etAmount, etNote;
     private Spinner spinnerAccount;
     private Button btnCommitTx;
+    private BudgetDb db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,8 +55,9 @@ public class AddTransactionActivity extends AppCompatActivity {
             }
         });
 
-        AccountLocalRepo aclr = new AccountLocalRepo(AddTransactionActivity.this);
-        final List<Account> accounts = aclr.query(new AccountQuery());
+        db = BudgetDb.getInstance(AddTransactionActivity.this);
+        AccountDao aclr = db.accountDao();
+        final List<Account> accounts = aclr.getAll();
 
         AccountAdapter accountAdapter =
                 new AccountAdapter(AddTransactionActivity.this, accounts);

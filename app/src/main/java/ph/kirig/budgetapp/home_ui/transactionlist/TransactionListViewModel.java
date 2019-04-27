@@ -9,19 +9,24 @@ package ph.kirig.budgetapp.home_ui.transactionlist;
 
 import android.content.Context;
 
+import androidx.lifecycle.ViewModel;
+
 import java.util.List;
 
-import androidx.lifecycle.ViewModel;
 import ph.kirig.budgetapp.models.TransactionRecord;
-import ph.kirig.budgetapp.persistence.local.TransactionLocalRepo;
+import ph.kirig.budgetapp.persistence.room.BudgetDb;
+import ph.kirig.budgetapp.persistence.room.TransactionDao;
+
 
 public class TransactionListViewModel extends ViewModel {
     private Context ctx;
-    private TransactionLocalRepo txlr;
+    private TransactionDao txlr;
     private List<TransactionRecord> recordList;
 
     public TransactionListViewModel(Context contextArg) {
         ctx = contextArg;
-        txlr = new TransactionLocalRepo(ctx);
+
+        BudgetDb db = BudgetDb.getInstance(contextArg);
+        txlr = db.transactionDao();
     }
 }

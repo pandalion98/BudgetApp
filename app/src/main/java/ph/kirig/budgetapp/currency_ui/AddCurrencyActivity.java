@@ -16,9 +16,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import ph.kirig.budgetapp.R;
 import ph.kirig.budgetapp.models.Currency;
-import ph.kirig.budgetapp.persistence.local.CurrencyLocalRepo;
+import ph.kirig.budgetapp.persistence.room.BudgetDb;
+import ph.kirig.budgetapp.persistence.room.CurrencyDao;
 
 public class AddCurrencyActivity extends AppCompatActivity {
 
@@ -27,14 +29,16 @@ public class AddCurrencyActivity extends AppCompatActivity {
     private SeekBar seekCurrDecimals;
     private Button btnCommitCurr;
 
-    private CurrencyLocalRepo repository;
+    private BudgetDb db;
+    private CurrencyDao cdao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_currency);
 
-        repository = new CurrencyLocalRepo(AddCurrencyActivity.this);
+        db = BudgetDb.getInstance(AddCurrencyActivity.this);
+        cdao = db.currencyDao();
 
         lblCurrDecimals = findViewById(R.id.label_decimals_selected);
         currDispName = findViewById(R.id.edittext_currency_name);
@@ -92,7 +96,7 @@ public class AddCurrencyActivity extends AppCompatActivity {
         }
 
         Currency c = new Currency(currFullName.trim(), abbrv.trim(), symb.trim(), scale);
-        repository.add(c);
+        cdao.add(c);
     }
 
 
