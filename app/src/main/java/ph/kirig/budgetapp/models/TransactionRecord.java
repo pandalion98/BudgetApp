@@ -7,13 +7,17 @@
 
 package ph.kirig.budgetapp.models;
 
-import java.math.BigDecimal;
-import java.util.UUID;
-
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
+
+import java.math.BigDecimal;
+import java.util.UUID;
+
+import ph.kirig.budgetapp.persistence.room.typeconverters.BigDecimalConverter;
 
 /**
  * Created by Gene on 15/03/2019.
@@ -24,6 +28,7 @@ import androidx.room.PrimaryKey;
 // TODO: Set up validation in the future, especially with API stuff.
 
 @Entity
+@TypeConverters({BigDecimalConverter.class})
 public class TransactionRecord {
     @PrimaryKey
     @NonNull
@@ -31,11 +36,11 @@ public class TransactionRecord {
     private String uuid;
 
     // Amount in base units (e.g. PHP centavo, BTC Satoshi, etc.)
-    @ColumnInfo(name = "time_epoch", typeAffinity = ColumnInfo.REAL)
+    @ColumnInfo(name = "time_epoch", typeAffinity = ColumnInfo.INTEGER)
     private long timeMillis;
 
     // Amount in base units (e.g. PHP centavo, BTC Satoshi, etc.)
-    @ColumnInfo(name = "amount", typeAffinity = ColumnInfo.REAL)
+    @ColumnInfo(name = "amount", typeAffinity = ColumnInfo.TEXT)
     private BigDecimal txAmount;
 
     @ColumnInfo(name = "owner_account_uuid", typeAffinity = ColumnInfo.TEXT)
@@ -55,6 +60,7 @@ public class TransactionRecord {
     }
 
     // Instantiated from persistence
+    @Ignore
     public TransactionRecord(@NonNull String uuid, long timeMillis, BigDecimal txAmount,
                              String ownerAccount, String category, String descriptionText) {
         this.uuid = uuid;
@@ -82,6 +88,14 @@ public class TransactionRecord {
         this.timeMillis = timeMillis;
     }
 
+    public BigDecimal getTxAmount() {
+        return txAmount;
+    }
+
+    public void setTxAmount(BigDecimal txAmount) {
+        this.txAmount = txAmount;
+    }
+
     public String getOwnerAccount() {
         return ownerAccount;
     }
@@ -102,17 +116,57 @@ public class TransactionRecord {
         return descriptionText;
     }
 
-    public void setDescriptionText(String desc) {
-        this.descriptionText = desc;
+    public void setDescriptionText(String descriptionText) {
+        this.descriptionText = descriptionText;
     }
-
-    // toPlainString ONLY
-    public BigDecimal getTxAmount() {
-        return txAmount;
-    }
-
-    public void setTxAmount(BigDecimal txAmount) {
-        this.txAmount = txAmount;
-    }
+//    @NonNull
+//    public String getUuid() {
+//        return uuid;
+//    }
+//
+//    public void setUuid(@NonNull String uuid) {
+//        this.uuid = uuid;
+//    }
+//
+//    public long getTimeMillis() {
+//        return timeMillis;
+//    }
+//
+//    public void setTimeMillis(long timeMillis) {
+//        this.timeMillis = timeMillis;
+//    }
+//
+//    public String getOwnerAccount() {
+//        return ownerAccount;
+//    }
+//
+//    public void setOwnerAccount(String ownerAccount) {
+//        this.ownerAccount = ownerAccount;
+//    }
+//
+//    public String getCategory() {
+//        return category;
+//    }
+//
+//    public void setCategory(String category) {
+//        this.category = category;
+//    }
+//
+//    public String getDescriptionText() {
+//        return descriptionText;
+//    }
+//
+//    public void setDescriptionText(String desc) {
+//        this.descriptionText = desc;
+//    }
+//
+//    // toPlainString ONLY
+//    public BigDecimal getTxAmount() {
+//        return txAmount;
+//    }
+//
+//    public void setTxAmount(BigDecimal txAmount) {
+//        this.txAmount = txAmount;
+//    }
 }
 

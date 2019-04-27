@@ -7,14 +7,15 @@
 
 package ph.kirig.budgetapp.persistence.room;
 
-import java.util.List;
-
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
+
+import java.util.List;
+
 import ph.kirig.budgetapp.models.TransactionRecord;
 
 /**
@@ -46,5 +47,5 @@ public interface TransactionDao {
 
     @Query("SELECT * FROM TransactionRecord WHERE time_epoch BETWEEN :timeFrom AND :timeTo " +
             "AND description LIKE :queryString")
-    List<TransactionDao> searchByString(long timeFrom, long timeTo, String queryString);
+    List<TransactionRecord> searchByString(long timeFrom, long timeTo, String queryString);
 }

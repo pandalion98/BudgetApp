@@ -7,12 +7,13 @@
 
 package ph.kirig.budgetapp.models;
 
-import java.util.UUID;
-
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
+
+import java.util.UUID;
 
 /**
  * Created by Gene on 01/04/2019.
@@ -25,21 +26,27 @@ public class Currency {
     @PrimaryKey
     @NonNull
     @ColumnInfo(name = "currency_uuid", typeAffinity = ColumnInfo.TEXT)
-    private final String uuid;
+    private String uuid;
 
     @ColumnInfo(name = "full_name", typeAffinity = ColumnInfo.TEXT)
-    private final String fullName;
+    private String fullName;
 
     @ColumnInfo(name = "abbreviation", typeAffinity = ColumnInfo.TEXT)
-    private final String abbreviation;
+    private String abbreviation;
 
     @ColumnInfo(name = "symbol", typeAffinity = ColumnInfo.TEXT)
-    private final String symbol;
+    private String symbol;
 
     @ColumnInfo(name = "numeric_scale", typeAffinity = ColumnInfo.INTEGER)
-    private final int numericScale;
+    private int numericScale;
+
+
+    // Default ctor
+    public Currency() {
+    }
 
     // Fresh, new currency
+    @Ignore
     public Currency(String fullName, String abbreviation, String symbol, int numericScale) {
         uuid = UUID.randomUUID().toString();
         this.fullName = fullName;
@@ -49,6 +56,7 @@ public class Currency {
     }
 
     // Instantiating from persistence
+    @Ignore
     public Currency(@NonNull String uuid,
                     String fullName, String abbreviation, String symbol, int numericScale) {
         this.uuid = uuid;
@@ -62,19 +70,39 @@ public class Currency {
         return fullName;
     }
 
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
     public String getAbbreviation() {
         return abbreviation;
+    }
+
+    public void setAbbreviation(String abbreviation) {
+        this.abbreviation = abbreviation;
     }
 
     public String getSymbol() {
         return symbol;
     }
 
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
+    }
+
     public int getNumericScale() {
         return numericScale;
     }
 
+    public void setNumericScale(int numericScale) {
+        this.numericScale = numericScale;
+    }
+
     public String getUuid() {
         return uuid;
+    }
+
+    public void setUuid(@NonNull String uuid) {
+        this.uuid = uuid;
     }
 }

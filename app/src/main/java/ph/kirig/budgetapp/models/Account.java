@@ -7,12 +7,13 @@
 
 package ph.kirig.budgetapp.models;
 
-import java.util.UUID;
-
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
+
+import java.util.UUID;
 
 /**
  * Created by Gene on 31/03/2019.
@@ -43,6 +44,7 @@ public class Account {
     }
 
     // Account from persistence
+    @Ignore
     public Account(@NonNull String uuid, String name, String currencyUuid, String metadata) {
         this.uuid = uuid;
         this.name = name;
@@ -53,6 +55,10 @@ public class Account {
     @NonNull
     public String getUuid() {
         return uuid;
+    }
+
+    public void setUuid(@NonNull String uuid) {
+        this.uuid = uuid;
     }
 
     public String getName() {
