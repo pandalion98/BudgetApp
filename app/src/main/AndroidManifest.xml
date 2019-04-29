@@ -9,12 +9,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:dist="http://schemas.android.com/apk/distribution"
     xmlns:tools="http://schemas.android.com/tools"
-    package="ph.kirig.budgetapp">
+    package="ph.kirig.javabudgetapp">
 
     <dist:module dist:instant="true" />
 
     <application
-        android:name=".KirigApp"
+        android:name="ph.kirig.javabudgetapp.KirigApp"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
@@ -22,23 +22,23 @@
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
         <activity
-            android:name=".currency_ui.CurrencyListActivity"
+            android:name="ph.kirig.javabudgetapp.currency_ui.CurrencyListActivity"
             android:label="@string/title_currency_list"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
-            android:name=".currency_ui.CurrencyDetailActivity"
+            android:name="ph.kirig.javabudgetapp.currency_ui.CurrencyDetailActivity"
             android:label="@string/title_currency_detail"
-            android:parentActivityName=".currency_ui.CurrencyListActivity"
+            android:parentActivityName="ph.kirig.javabudgetapp.currency_ui.CurrencyListActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="ph.kirig.budgetapp.currency_ui.CurrencyListActivity" />
+                android:value="ph.kirig.javabudgetapp.currency_ui.CurrencyListActivity" />
         </activity>
-        <activity android:name=".currency_ui.AddCurrencyActivity" />
-        <activity android:name=".AddAccountActivity" />
-        <activity android:name=".AddTransactionActivity" />
+        <activity android:name="ph.kirig.javabudgetapp.currency_ui.AddCurrencyActivity" />
+        <activity android:name="ph.kirig.javabudgetapp.AddAccountActivity" />
+        <activity android:name="ph.kirig.javabudgetapp.AddTransactionActivity" />
         <activity
-            android:name=".MainActivity"
+            android:name="ph.kirig.javabudgetapp.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
