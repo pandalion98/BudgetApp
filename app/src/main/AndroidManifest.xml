@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (c) 2019 Kirig Technologies. All rights reserved.
   ~
   ~ This document is considered proprietary and confidential. It may not be stored, reproduced,
@@ -34,7 +33,9 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="ph.kirig.javabudgetapp.currency_ui.CurrencyListActivity" />
         </activity>
-        <activity android:name="ph.kirig.javabudgetapp.currency_ui.AddCurrencyActivity" />
+        <activity
+            android:name="ph.kirig.javabudgetapp.currency_ui.AddCurrencyActivity"
+            android:label="@string/title_currency_detail" />
         <activity android:name="ph.kirig.javabudgetapp.AddAccountActivity" />
         <activity android:name="ph.kirig.javabudgetapp.AddTransactionActivity" />
         <activity

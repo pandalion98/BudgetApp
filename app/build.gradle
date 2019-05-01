@@ -9,7 +9,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "ph.kirig.budgetapp"
+        applicationId "ph.kirig.javabudgetapp"
         minSdkVersion 21
         targetSdkVersion 28
         versionCode 1
